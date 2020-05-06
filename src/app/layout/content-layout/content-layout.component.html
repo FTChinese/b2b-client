@@ -1,1 +1,15 @@
-<p>content-layout works!</p>
+<main class="page-content mt-3" role="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3" role="navigation">
+        <app-nav></app-nav>
+      </div>
+
+      <div class="col-sm-9">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>
