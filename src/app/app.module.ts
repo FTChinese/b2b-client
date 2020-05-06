@@ -3,21 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
-import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { NavComponent } from './layout/nav/nav.component';
+import { LayoutModule } from './layout/layout.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthLayoutComponent,
-    ContentLayoutComponent,
-    FooterComponent,
-    NavComponent
   ],
   imports: [
     BrowserModule,
+    LayoutModule,
+    AuthModule,
     AppRoutingModule
   ],
   providers: [],
