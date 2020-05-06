@@ -1,27 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "palette";
+@import "main";
 
-body {
-  font-family: "Helvetica Neue", "Lucida Grande", Verdana, "PingFang SC",
-    "PingFang TC", "Hiragino Sans GB", "Heiti SC", "Heiti TC",
-    "WenQuanYi Micro Hei", "Microsoft YaHei", "Microsoft JhengHei", STHeiti,
-    sans-serif;
-  background-color: $color-paper;
-}
-.page-content {
-  min-height: 80vh;
-}
-table caption {
-  caption-side: top;
-  text-align: center;
-}
-a {
-  color: $color-teal;
-}
 
-a {
-  &:hover {
-    color: $color-black70;
-  }
-}
