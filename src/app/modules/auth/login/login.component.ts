@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormService } from 'src/app/shared/service/form.service';
-import { DynamicControl, InputControl } from 'src/app/shared/control';
+import { DynamicControl, InputControl } from 'src/app/shared/widget/control';
 import { Validators } from '@angular/forms';
-import { Button } from 'src/app/shared/button';
+import { Button } from 'src/app/shared/widget/button';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { Credentials } from 'src/app/data/schema/admin';
