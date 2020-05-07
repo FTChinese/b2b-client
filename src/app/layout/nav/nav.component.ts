@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Link } from 'src/app/data/schema/link';
+import { Link } from 'src/app/shared/widget/link';
 
 @Component({
   selector: 'app-nav',
