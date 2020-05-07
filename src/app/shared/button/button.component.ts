@@ -1,5 +1,5 @@
 import { Component, Input, HostBinding, OnInit } from '@angular/core';
-import { Button } from '../button';
+import { Button } from '../widget/button';
 
 @Component({
   selector: 'app-button',
