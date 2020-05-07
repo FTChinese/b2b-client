@@ -11,6 +11,7 @@ function isExpired(pp: Passport): boolean {
 export class AuthService {
   passport: Passport | null = null;
 
+  redirectUrl: string;
   private storeKey = 'ftc_b2b';
 
   get isLoggedIn(): boolean {
