@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Passport, Credentials } from 'src/app/data/schema/admin';
+import { Passport } from 'src/app/data/schema/admin';
+import { Credentials } from 'src/app/data/schema/form-data';
 
 function isExpired(pp: Passport): boolean {
   return (Date.now() / 1000) > pp.expiresAt;
+}
+
+function randomString(): string {
+  return Math.random().toString(36).substring(2, 15);
 }
 
 @Injectable({
@@ -50,14 +55,14 @@ export class AuthService {
 
   login(credentials: Credentials): Passport {
     const pp: Passport = {
-      id: '',
+      id: randomString(),
       email: credentials.email,
       displayName: null,
       active: true,
       verified: false,
-      teamId: '',
+      teamId: null,
       expiresAt: Date.now() / 1000 + 86400,
-      token: '',
+      token: `${randomString()}.${randomString()}.${randomString}`,
     };
 
     this.passport = pp;
@@ -67,14 +72,14 @@ export class AuthService {
 
   singUp(credentials: Credentials): Passport {
     const pp: Passport =  {
-      id: '',
+      id: randomString(),
       email: credentials.email,
       displayName: null,
       active: true,
       verified: false,
-      teamId: '',
+      teamId: null,
       expiresAt: Date.now() / 1000 + 86400,
-      token: '',
+      token: `${randomString()}.${randomString()}.${randomString}`,
     };
 
     this.passport = pp;
