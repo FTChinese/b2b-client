@@ -18,8 +18,6 @@ export class DynamicControlComponent implements OnInit {
   }
 
   get isInvalid(): boolean {
-    console.log('Checking validity');
-    console.log(this.formControl.errors);
     return this.formControl.invalid && (this.formControl.dirty || this.formControl.touched);
   }
 
@@ -63,39 +61,39 @@ export class DynamicControlComponent implements OnInit {
     console.log(errors);
 
     if (errors.required) {
-      return `${this.control.label} is required`;
+      return `${this.control.label}为必填项`;
     }
 
     if (errors.email) {
-      return 'Please provide a valid email';
+      return '请输入有效的邮箱地址';
     }
 
     if (errors.min) {
-      return 'Too low';
+      return '数值过小';
     }
 
     if (errors.max) {
-      return 'Too high';
+      return '数值过高';
     }
 
     if (errors.minLength) {
-      return 'Too short';
+      return '输入的内容过短';
     }
 
     if (errors.maxLength) {
-      return 'Too long';
+      return '输入的内容过长';
     }
 
     if (errors.pattern) {
-      return 'Pattern mismatched';
+      return '输入不匹配';
     }
 
     if (errors.missing) {
-      return 'The requesting resource does not exist, or is removed';
+      return '您所请求的资源不存在';
     }
 
     if (errors.missing_field) {
-      return `The value for ${this.control.label} is missing`;
+      return `${this.control.label}为必填项`;
     }
 
     if (errors.invalid) {
@@ -103,7 +101,7 @@ export class DynamicControlComponent implements OnInit {
     }
 
     if (errors.already_exists) {
-      return `The same value for ${this.control.label} already exists. Please use another one.`;
+      return `该${this.control.label}已经存在`;
     }
 
     return '';
