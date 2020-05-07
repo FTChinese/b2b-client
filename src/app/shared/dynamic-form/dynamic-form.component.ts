@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DynamicControl } from '../control';
 import { FormGroup } from '@angular/forms';
-import { ControlService } from '../control.service';
-import { FormService } from '../form.service';
+import { ControlService } from '../service/control.service';
+import { FormService } from '../service/form.service';
 import { Button } from '../button';
 import { RequestError } from 'src/app/data/schema/request-result';
 
@@ -41,13 +41,16 @@ export class DynamicFormComponent implements OnInit {
   onSubmit() {
     const data = JSON.stringify(this.form.getRawValue());
     this.formService.submit(data);
+    // Disable the form upon submission.
+    this.form.disable();
   }
 
   // Set validation errors received from API
   // to corresponding field.
   private setError(err: RequestError) {
     console.log('Setting error manually');
-
+    // Enable it in case of server-side errors.
+    this.form.enable();
     if (!err.unprocessable) {
       return;
     }
