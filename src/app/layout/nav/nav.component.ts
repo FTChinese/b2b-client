@@ -28,11 +28,7 @@ export class NavComponent implements OnInit {
     {
       name: '设置',
       href: '/settings'
-    },
-    {
-      name: '退出',
-      href: '/logout'
-    },
+    }
   ];
 
   constructor() { }
