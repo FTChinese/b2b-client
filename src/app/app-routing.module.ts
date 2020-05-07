@@ -4,9 +4,17 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 import { LoginComponent } from './modules/auth/login/login.component';
 import { ForgotPasswordComponent } from './modules/auth/forgot-password/forgot-password.component';
 import { SignupComponent } from './modules/auth/signup/signup.component';
+import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
+import { AuthGuard } from './core/guard/auth.guard';
+import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    component: ContentLayoutComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: '',
     component: AuthLayoutComponent,
@@ -36,6 +44,10 @@ const routes: Routes = [
         component: SignupComponent
       }
     ]
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 
