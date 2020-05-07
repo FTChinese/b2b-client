@@ -7,13 +7,20 @@ import { SignupComponent } from './modules/auth/signup/signup.component';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
-
+import { ResetPasswordComponent } from './modules/auth/reset-password/reset-password.component';
+import { HomeComponent } from './modules/home/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ContentLayoutComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: HomeComponent
+      },
+    ]
   },
   {
     path: '',
@@ -32,6 +39,10 @@ const routes: Routes = [
       {
         path: 'forgot-password',
         component: ForgotPasswordComponent
+      },
+      {
+        path: 'forgot-password/:token',
+        component: ResetPasswordComponent
       }
     ]
   },
