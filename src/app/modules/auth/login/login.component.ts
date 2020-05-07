@@ -5,7 +5,8 @@ import { Validators } from '@angular/forms';
 import { Button } from 'src/app/shared/widget/button';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Router, NavigationExtras } from '@angular/router';
-import { Credentials } from 'src/app/data/schema/admin';
+import { Credentials } from 'src/app/data/schema/form-data';
+import { sitemap } from 'src/app/layout/sitemap';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +35,8 @@ export class LoginComponent implements OnInit {
   ];
 
   button: Button = Button.primary().setName('登录');
+  pwResetLink = `/${sitemap.forgotPassword.path}`;
+  signUpLink = `/${sitemap.signUp.path}`;
 
   constructor(
     private formService: FormService,
