@@ -1,8 +1,3 @@
-export interface Credentials {
-  email: string;
-  password: string;
-}
-
 export interface AdminAccount {
   id: string;
   email: string;
