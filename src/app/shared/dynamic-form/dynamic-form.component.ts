@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DynamicControl } from '../control';
+import { DynamicControl } from '../widget/control';
 import { FormGroup } from '@angular/forms';
 import { ControlService } from '../service/control.service';
 import { FormService } from '../service/form.service';
-import { Button } from '../button';
+import { Button } from '../widget/button';
 import { RequestError } from 'src/app/data/schema/request-result';
 
 @Component({
