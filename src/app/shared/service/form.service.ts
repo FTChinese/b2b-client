@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { RequestError } from '../data/schema/request-result';
+import { RequestError } from '../../data/schema/request-result';
 
 /**
  * @description FormService is used to pass data to host
