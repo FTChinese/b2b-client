@@ -7,6 +7,7 @@ import { NavComponent } from './nav/nav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { JumboLayoutComponent } from './jumbo-layout/jumbo-layout.component';
 
 @NgModule({
   declarations: [
@@ -15,16 +16,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FooterComponent,
     NavComponent,
     ToolbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    JumboLayoutComponent,
   ],
   imports: [
     CommonModule,
     RouterModule
   ],
-  exports: [
-    AuthLayoutComponent,
-    ContentLayoutComponent,
-    PageNotFoundComponent,
-  ]
 })
 export class LayoutModule { }
