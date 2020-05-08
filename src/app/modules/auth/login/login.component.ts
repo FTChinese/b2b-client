@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     }),
   ];
 
-  button: Button = Button.primary().setName('登录');
+  button: Button = Button.primary().setBlock().setName('登录');
   pwResetLink = `/${sitemap.forgotPassword.path}`;
   signUpLink = `/${sitemap.signUp.path}`;
 

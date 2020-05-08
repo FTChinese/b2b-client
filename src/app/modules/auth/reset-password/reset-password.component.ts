@@ -48,7 +48,7 @@ export class ResetPasswordComponent implements OnInit {
     }),
   ];
 
-  button: Button = Button.primary().setName('重置密码');
+  button: Button = Button.primary().setBlock().setName('重置密码');
 
   tokenState: TokenState = null;
   token: string; // The token acquired from url path.

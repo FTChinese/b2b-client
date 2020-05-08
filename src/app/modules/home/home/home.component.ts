@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     }),
   ];
 
-  button: Button = Button.primary().setName('保存');
+  button: Button = Button.primary().setBlock().setName('保存');
 
   constructor(
     private authService: AuthService,

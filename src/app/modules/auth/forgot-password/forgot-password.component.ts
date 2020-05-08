@@ -27,7 +27,7 @@ export class ForgotPasswordComponent implements OnInit {
     }),
   ];
 
-  button: Button = Button.primary().setName('发送邮件');
+  button: Button = Button.primary().setBlock().setName('发送邮件');
 
   // Indicates whether email is sent.
   done = false;
