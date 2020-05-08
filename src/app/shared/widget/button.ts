@@ -21,7 +21,7 @@ export class Button {
   name: string;
 
   private style: BtnStyle = 'primary';
-  private size: BtnSize = 'block';
+  private size: BtnSize = null;
   private outline = false;
 
   static primary(): Button {
