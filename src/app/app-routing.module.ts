@@ -13,7 +13,7 @@ import { JumboLayoutComponent } from './layout/jumbo-layout/jumbo-layout.compone
 import { TeamGuard } from './core/guard/team.guard';
 import { ProductsComponent } from './modules/home/products/products.component';
 import { LicenceModule } from './modules/licence/licence.module';
-import { SettingModule } from './modules/setting/setting.module';
+import { SettingsComponent } from './modules/setting/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -43,7 +43,7 @@ const routes: Routes = [
       },
       {
         path: 'settings',
-        loadChildren: () => SettingModule,
+        component: SettingsComponent,
       }
     ]
   },
