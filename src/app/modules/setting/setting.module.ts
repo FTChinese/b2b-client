@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SettingsComponent } from './settings/settings.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
 @NgModule({
   declarations: [SettingsComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule,
   ],
   exports: [SettingsComponent]
 })
