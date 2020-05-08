@@ -9,17 +9,42 @@ import { AuthGuard } from './core/guard/auth.guard';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
 import { ResetPasswordComponent } from './modules/auth/reset-password/reset-password.component';
 import { HomeComponent } from './modules/home/home/home.component';
+import { JumboLayoutComponent } from './layout/jumbo-layout/jumbo-layout.component';
+import { TeamGuard } from './core/guard/team.guard';
+import { ProductsComponent } from './modules/home/products/products.component';
+import { LicenceModule } from './modules/licence/licence.module';
+import { SettingModule } from './modules/setting/setting.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: ContentLayoutComponent,
     canActivate: [AuthGuard],
+    component: JumboLayoutComponent,
     children: [
       {
         path: '',
+        canActivate: [TeamGuard],
         component: HomeComponent
+      }
+    ]
+  },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    component: ContentLayoutComponent,
+    children: [
+      {
+        path: 'products',
+        component: ProductsComponent
       },
+      {
+        path: 'licences',
+        loadChildren: () => LicenceModule
+      },
+      {
+        path: 'settings',
+        loadChildren: () => SettingModule,
+      }
     ]
   },
   {
@@ -58,7 +83,13 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: PageNotFoundComponent
+    component: JumboLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: PageNotFoundComponent
+      }
+    ]
   }
 ];
 

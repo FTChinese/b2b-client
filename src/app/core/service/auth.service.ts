@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Passport } from 'src/app/data/schema/admin';
-import { Credentials } from 'src/app/data/schema/form-data';
+import { Credentials, Team } from 'src/app/data/schema/form-data';
 
 function isExpired(pp: Passport): boolean {
   return (Date.now() / 1000) > pp.expiresAt;
@@ -39,6 +39,14 @@ export class AuthService {
     return true;
   }
 
+  get isTeamSet(): boolean {
+    if (!this.passport) {
+      return false;
+    }
+
+    return !!this.passport.teamId;
+  }
+
   get displayName(): string {
     if (!this.passport) {
       return '';
@@ -53,6 +61,11 @@ export class AuthService {
 
   constructor() { }
 
+  private savePassport(pp: Passport) {
+    window.localStorage.setItem(this.storeKey, JSON.stringify(pp));
+    this.passport = pp;
+  }
+
   login(credentials: Credentials): Passport {
     const pp: Passport = {
       id: randomString(),
@@ -65,7 +78,7 @@ export class AuthService {
       token: `${randomString()}.${randomString()}.${randomString}`,
     };
 
-    this.passport = pp;
+    this.savePassport(pp);
 
     return pp;
   }
@@ -82,7 +95,7 @@ export class AuthService {
       token: `${randomString()}.${randomString()}.${randomString}`,
     };
 
-    this.passport = pp;
+    this.savePassport(pp);
 
     return pp;
   }
@@ -93,5 +106,9 @@ export class AuthService {
   logout() {
     this.passport = null;
     localStorage.removeItem(this.storeKey);
+  }
+
+  createTeam(team: Team) {
+    this.passport.teamId = randomString();
   }
 }
