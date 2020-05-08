@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Passport } from 'src/app/data/schema/admin';
 import { Credentials, Team } from 'src/app/data/schema/form-data';
+import { randomString } from 'src/app/data/mock';
 
 function isExpired(pp: Passport): boolean {
   return (Date.now() / 1000) > pp.expiresAt;
-}
-
-function randomString(): string {
-  return Math.random().toString(36).substring(2, 15);
 }
 
 @Injectable({
