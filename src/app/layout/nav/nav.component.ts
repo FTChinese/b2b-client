@@ -10,6 +10,10 @@ export class NavComponent implements OnInit {
 
   navItems: Link[] = [
     {
+      name: '购买',
+      href: '/products'
+    },
+    {
       name: '许可',
       href: '/licences'
     },
