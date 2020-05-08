@@ -27,3 +27,7 @@ export type ResettingPassword = Password & {
   token: string;
 };
 
+export interface Team {
+  name: string;
+  invoiceTitle: string;
+}
