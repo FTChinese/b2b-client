@@ -1,12 +1,6 @@
 import { LicenceStatus } from './enum';
 import { Plan } from './product';
-
-export interface Assignee {
-  ftcId: string | null;
-  email: string | null;
-  userName: string | null;
-  isVip: boolean;
-}
+import { Assignee } from './assignee';
 
 // All licence should have a Renw button;
 // Only standard version has Upgrade button;
@@ -26,4 +20,9 @@ export interface Licence {
   lastInviteeEmail: string | null;
   plan: Plan;
   assignee: Assignee;
+}
+
+export interface LicenceList {
+  total: number;
+  data: Licence[];
 }
