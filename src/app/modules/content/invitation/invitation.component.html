@@ -1,0 +1,27 @@
+<h2 class="mb-3">已发邀请</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>被邀请人</th>
+      <th>备注</th>
+      <th>创建时间</th>
+      <th>有效时间</th>
+      <th>状态</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let inv of invitations">
+      <td>{{inv.email}}</td>
+      <td>{{inv.description}}</td>
+      <td>{{inv.createdUtc}}</td>
+      <td>{{inv.expirationDays}}</td>
+      <td>
+        <span>{{inv.status}}</span>
+        <button *ngIf="inv.status === 'created'" type="button">撤回</button>
+      </td>
+      <td><a [routerLink]="['../licences', inv.licenceId]">查看许可</a></td>
+    </tr>
+  </tbody>
+</table>
+
