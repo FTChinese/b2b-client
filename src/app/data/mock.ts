@@ -1,13 +1,15 @@
 import { Product, Plan } from './schema/product';
 import { Licence } from './schema/licence';
+import { Invitation } from './schema/invitation';
+import { Staffer } from './schema/assignee';
 
 export function randomString(): string {
   return Math.random().toString(36).substring(2, 15);
 }
 
-export function invitationID(): string {
-  return `inv_${randomString()}`;
-}
+const RANGE = (x, y) => Array.from((function*() {
+  while (x <= y) { yield x++; }
+})());
 
 export const stdPlan: Plan = {
   id: 'plan_ICMPPM0UXcpZ',
@@ -156,5 +158,70 @@ export const licences: Licence[] = [
       userName: 'test user c',
       isVip: false,
     },
+  }
+];
+
+function invitationID(): string {
+  return `inv_${randomString()}`;
+}
+
+const teamId = `team_${randomString()}`;
+
+function generateEmail(): string {
+  return `${Math.random().toString(36).substring(2, 6)}@example.org`;
+}
+
+export const invitations: Invitation[] = [
+  {
+    id: invitationID(),
+    licenceId: licenceID(),
+    teamId,
+    email: generateEmail(),
+    description: null,
+    expirationDays: 7,
+    status: 'created',
+    createdUtc,
+    updatedUtc: createdUtc,
+  },
+  {
+    id: invitationID(),
+    licenceId: licenceID(),
+    teamId,
+    email: generateEmail(),
+    description: null,
+    expirationDays: 7,
+    status: 'accepted',
+    createdUtc,
+    updatedUtc: createdUtc,
+  },
+  {
+    id: invitationID(),
+    licenceId: licenceID(),
+    teamId,
+    email: generateEmail(),
+    description: null,
+    expirationDays: 7,
+    status: 'revoked',
+    createdUtc,
+    updatedUtc: createdUtc,
+  }
+];
+
+
+export const staff: Staffer[] = [
+  {
+    email: generateEmail(),
+    teamId,
+    ftcId: randomString(),
+  },
+  {
+    email: generateEmail(),
+    teamId,
+    ftcId: null,
+  },
+  {
+    email: generateEmail(),
+    teamId,
+    ftcId: randomString(),
   }
 ];
