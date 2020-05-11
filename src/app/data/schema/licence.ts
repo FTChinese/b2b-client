@@ -8,12 +8,17 @@ export interface Assignee {
   isVip: boolean;
 }
 
+// All licence should have a Renw button;
+// Only standard version has Upgrade button;
 export interface Licence {
   id: string;
   teamId: string;
   expireDate: string | null;
   trialStart: string | null;
   trialEnd: string | null;
+  // available: admin could send invitation
+  // invited: admin could revoke the invitation
+  // granted: admin could revoke the licence
   status: LicenceStatus | null;
   createdUtc: string | null;
   updatedUtc: string | null;
