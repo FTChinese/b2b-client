@@ -23,7 +23,7 @@ export class NavComponent implements OnInit {
     },
     {
       name: '成员',
-      href: '/users',
+      href: '/staff',
     },
     {
       name: '交易历史',
