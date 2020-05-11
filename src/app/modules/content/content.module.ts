@@ -7,6 +7,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { LicenceListComponent } from './licence-list/licence-list.component';
 import { LicenceDetailComponent } from './licence-detail/licence-detail.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { InvitationComponent } from './invitation/invitation.component';
+import { StafferComponent } from './staffer/staffer.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ProductsComponent,
     SettingsComponent,
     LicenceListComponent,
-    LicenceDetailComponent
+    LicenceDetailComponent,
+    InvitationComponent,
+    StafferComponent
   ],
   imports: [
     CommonModule,
