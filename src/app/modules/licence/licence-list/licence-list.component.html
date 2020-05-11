@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12 col-lg-8">
+  <div class="col-md-12 col-lg-9">
     <h2 class="mb-3">已购买的许可</h2>
     <table class="table">
       <thead>
@@ -7,17 +7,47 @@
           <th>ID</th>
           <th>截止日期</th>
           <th>订阅方案</th>
-          <th>续订/升级</th>
           <th>状态</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
+        <tr *ngFor="let lic of licences">
+          <td>{{lic.id}}</td>
+          <td>{{lic.expireDate}}</td>
+          <td>
+            <span>{{lic.plan.tier}}</span>
+
+            <button type="button">续订</button>
+            <button *ngIf="lic.plan.tier === 'standard'">升级</button>
+          </td>
+          <ng-container [ngSwitch]="lic.status">
+            <td *ngSwitchCase="'available'">
+              <span>未使用</span>
+              <button type="button">发送邀请</button>
+            </td>
+            <td *ngSwitchCase="'invited'">
+              <span>已邀请 {{lic.lastInviteeEmail}}</span>
+              <button type="button">撤回邀请</button>
+            </td>
+            <td *ngSwitchCase="'granted'">
+              <span>已授权 {{lic.assignee.email}}</span>
+              <button type="button">撤销授权</button>
+            </td>
+          </ng-container>
+
         </tr>
       </tbody>
     </table>
   </div>
 
-  <div class="col-md-12 col-lg-4"></div>
+  <div class="col-md-12 col-lg-3">
+    <h5>许可状态</h5>
+    <p>每份许可处于三种状态之一：</p>
+    <ul>
+      <li>未使用：此时您可以发送邀请给所属机构成员，接受者邀请邮件后点击邮件内的链接可以获得该许可；</li>
+      <li>已邀请：您已经发送了邀请邮件而接受者尚未接受期间，可以撤回邀请</li>
+      <li>已授权：被邀请人已经接受了该许可，此时您可以撤销授权，使用者的会员状态将被收回。</li>
+    </ul>
+    <p>一份许可在任何时间段仅供以为用户使用。</p>
+  </div>
 </div>
