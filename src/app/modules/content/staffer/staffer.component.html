@@ -1,0 +1,12 @@
+<div class="col-md-12 col-lg-6">
+  <h2>成员管理</h2>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let staffer of staff">
+        <td>{{staffer.email}}</td>
+        <td><button type="button">删除</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
