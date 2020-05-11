@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let lic of licences">
-          <td><a routerLink="['licences', lic.id]">{{lic.id}}</a></td>
+          <td><a [routerLink]="lic.id">{{lic.id}}</a></td>
           <td>{{lic.expireDate}}</td>
           <td>
             <span>{{lic.plan.tier}}</span>
