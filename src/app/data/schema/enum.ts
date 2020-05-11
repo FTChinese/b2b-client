@@ -8,3 +8,4 @@ export type SubStatus = 'active' | 'canceled' | 'incomplete' | 'incomplate_expir
 export type OrderType = 'create' | 'renew' | 'upgrade';
 export type AccountKind = 'ftc' | 'wechat' | 'linked';
 export type LicenceStatus = 'available' | 'invited' | 'granted';
+export type InvitationStatus = 'created' | 'accepted' | 'revoked';
