@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let lic of licences">
-          <td>{{lic.id}}</td>
+          <td><a routerLink="['licences', lic.id]">{{lic.id}}</a></td>
           <td>{{lic.expireDate}}</td>
           <td>
             <span>{{lic.plan.tier}}</span>
@@ -48,6 +48,6 @@
       <li>已邀请：您已经发送了邀请邮件而接受者尚未接受期间，可以撤回邀请</li>
       <li>已授权：被邀请人已经接受了该许可，此时您可以撤销授权，使用者的会员状态将被收回。</li>
     </ul>
-    <p>一份许可在任何时间段仅供以为用户使用。</p>
+    <p>一份许可在任何时间段仅供一位用户使用。</p>
   </div>
 </div>

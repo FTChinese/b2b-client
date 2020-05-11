@@ -7,13 +7,11 @@ import { SignupComponent } from './modules/auth/signup/signup.component';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
-import { ResetPasswordComponent } from './modules/auth/reset-password/reset-password.component';
 import { HomeComponent } from './modules/home/home/home.component';
 import { JumboLayoutComponent } from './layout/jumbo-layout/jumbo-layout.component';
 import { TeamGuard } from './core/guard/team.guard';
-import { ProductsComponent } from './modules/home/products/products.component';
-import { LicenceModule } from './modules/licence/licence.module';
-import { SettingsComponent } from './modules/setting/settings/settings.component';
+import { AuthModule } from './modules/auth/auth.module';
+import { ContentModule } from './modules/content/content.module';
 
 const routes: Routes = [
   {
@@ -30,20 +28,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard],
     component: ContentLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
-        path: 'products',
-        component: ProductsComponent
-      },
-      {
-        path: 'licences',
-        loadChildren: () => LicenceModule
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent,
+        path: '',
+        loadChildren: () => ContentModule
       }
     ]
   },
@@ -52,32 +42,8 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       {
-        path: 'login',
-        component: LoginComponent
-      }
-    ],
-  },
-  {
-    path: '',
-    component: AuthLayoutComponent,
-    children: [
-      {
-        path: 'forgot-password',
-        component: ForgotPasswordComponent
-      },
-      {
-        path: 'forgot-password/:token',
-        component: ResetPasswordComponent
-      }
-    ]
-  },
-  {
-    path: '',
-    component: AuthLayoutComponent,
-    children: [
-      {
-        path: 'signup',
-        component: SignupComponent
+        path: '',
+        loadChildren: () => AuthModule
       }
     ]
   },
@@ -94,7 +60,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(
+      routes,
+      {enableTracing: true}
+    )
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

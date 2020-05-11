@@ -18,12 +18,12 @@ export class NavComponent implements OnInit {
       href: '/licences'
     },
     {
-      name: '成员',
-      href: '/users',
-    },
-    {
       name: '邀请',
       href: '/invitations',
+    },
+    {
+      name: '成员',
+      href: '/users',
     },
     {
       name: '交易历史',
