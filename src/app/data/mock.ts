@@ -1,11 +1,8 @@
 import { Product, Plan } from './schema/product';
+import { Licence } from './schema/licence';
 
 export function randomString(): string {
   return Math.random().toString(36).substring(2, 15);
-}
-
-export function licenceID(): string {
-  return `lic_${randomString()}`;
 }
 
 export function invitationID(): string {
@@ -44,7 +41,7 @@ export const prmPlan: Plan = {
       priceOff: 200
     }
   ]
-}
+};
 
 export const products: Product[] = [
   {
@@ -74,5 +71,90 @@ export const products: Product[] = [
       'FT中文网2018年度论坛门票2张，价值3999元/张 （不含差旅与食宿）'
     ],
     plan: prmPlan
+  }
+];
+
+const createdUtc = '2020-05-05T17:19:00Z';
+
+function licenceID(): string {
+  return `lic_${randomString()}`;
+}
+
+export const licences: Licence[] = [
+  {
+    id: licenceID(),
+    teamId: '',
+    expireDate: '2021-05-20',
+    trialStart: '2020-05-05',
+    trialEnd: '2020-05-12',
+    status: 'available',
+    createdUtc,
+    updatedUtc: createdUtc,
+    lastInvitationId: null,
+    lastInviteeEmail: null,
+    plan: stdPlan,
+    assignee: {
+      ftcId: null,
+      email: null,
+      userName: null,
+      isVip: false,
+    },
+  },
+  {
+    id: licenceID(),
+    teamId: '',
+    expireDate: '2021-05-20',
+    trialStart: '2020-05-05',
+    trialEnd: '2020-05-12',
+    status: 'invited',
+    createdUtc,
+    updatedUtc: createdUtc,
+    lastInvitationId: invitationID(),
+    lastInviteeEmail: 'testA@example.rog',
+    plan: stdPlan,
+    assignee: {
+      ftcId: null,
+      email: null,
+      userName: null,
+      isVip: false,
+    },
+  },
+  {
+    id: licenceID(),
+    teamId: '',
+    expireDate: '2021-05-20',
+    trialStart: '2020-05-05',
+    trialEnd: '2020-05-12',
+    status: 'granted',
+    createdUtc,
+    updatedUtc: createdUtc,
+    lastInvitationId: invitationID(),
+    lastInviteeEmail: 'testB@example.org',
+    plan: stdPlan,
+    assignee: {
+      ftcId: randomString(),
+      email: 'testB@example.org',
+      userName: 'test user b',
+      isVip: false,
+    },
+  },
+  {
+    id: licenceID(),
+    teamId: '',
+    expireDate: '2021-05-20',
+    trialStart: '2020-05-05',
+    trialEnd: '2020-05-12',
+    status: 'granted',
+    createdUtc,
+    updatedUtc: createdUtc,
+    lastInvitationId: invitationID(),
+    lastInviteeEmail: 'testC@example.org',
+    plan: prmPlan,
+    assignee: {
+      ftcId: randomString(),
+      email: 'testC@example.org',
+      userName: 'test user c',
+      isVip: false,
+    },
   }
 ];
