@@ -1,7 +1,7 @@
 import { LicenceStatus } from './enum';
 import { Plan } from './product';
 import { Assignee } from './assignee';
-import { differenceInCalendarDays, parseISO, isBefore } from 'date-fns';
+import { differenceInCalendarDays, parseISO, isBefore, isAfter } from 'date-fns';
 
 // All licence should have a Renw button;
 // Only standard version has Upgrade button;
@@ -26,11 +26,16 @@ export interface Licence {
 export function remainingDays(l: Licence): number {
   const expireDate = parseISO(l.expireDate);
   const now = Date.now();
-  if (isBefore(expireDate, now)) {
-    return 0;
+
+  if (isAfter(expireDate, now)) {
+    return differenceInCalendarDays(expireDate, now);
   }
 
-  return differenceInCalendarDays(expireDate, now);
+  return 0;
+}
+
+export function isExpired(l: Licence): boolean {
+  return isBefore(parseISO(l.expireDate), new Date());
 }
 
 export interface LicenceList {
