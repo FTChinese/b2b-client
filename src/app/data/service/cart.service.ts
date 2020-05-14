@@ -10,11 +10,33 @@ import { Tier } from '../schema/enum';
 })
 export class CartService {
 
-  stdPlanCart: Cart;
-  prmPlanCart: Cart;
+  carts: Map<Tier, Cart> = new Map();
+
+  get cartsArray(): Cart[] {
+    const c: Cart[] = [];
+    const std = this.carts.get('standard');
+    if (std) {
+      c.push(std);
+    }
+
+    const prm = this.carts.get('premium');
+    if (prm) {
+      c.push(prm);
+    }
+
+    return c;
+  }
 
   get totalAmount(): number {
-    return this.stdPlanCart.totalAmount + this.prmPlanCart.totalAmount;
+    return Array.from(this.carts.values())
+      .map(cart => cart.totalAmount)
+      .reduce((prev, curr) => prev + curr, 0);
+  }
+
+  get totalItems(): number {
+    return Array.from(this.carts.values())
+      .map(cart => cart.count)
+      .reduce((prev, curr) => prev + curr, 0);
   }
 
   constructor() { }
@@ -22,49 +44,30 @@ export class CartService {
   getProducts(): Product[] {
 
     products.forEach(product => {
-      switch (product.plan.tier) {
-        case 'standard':
-          if (this.stdPlanCart) {
-            this.stdPlanCart.setPlan(product.plan);
-          } else {
-            this.stdPlanCart = new Cart(product.plan);
-          }
-          break;
-
-        case 'premium':
-          if (this.prmPlanCart) {
-            this.prmPlanCart.setPlan(product.plan);
-          } else {
-            this.prmPlanCart = new Cart(product.plan);
-          }
-          break;
+      const cart = this.carts.get(product.plan.tier);
+      if (cart) {
+        cart.setPlan(product.plan);
+      } else {
+        this.carts.set(product.plan.tier, new Cart(product.plan));
       }
     });
 
     return products;
   }
 
-  addNewSubs(tier: Tier) {
-    switch (tier) {
-      case 'standard':
-        this.stdPlanCart.addNewSubs();
-        break;
-
-      case 'premium':
-        this.prmPlanCart.addNewSubs();
-        break;
-    }
+  addNewSubs(plan: Plan) {
+    this.carts.get(plan.tier)?.addNewSubs();
   }
 
   addRenewal(l: Licence) {
-    switch (l.plan.tier) {
-      case 'standard':
-        this.stdPlanCart.addRenewal(l);
-        break;
+    this.carts.get(l.plan.tier)?.addRenewal(l);
+  }
 
-      case 'premium':
-        this.prmPlanCart.addRenewal(l);
-        break;
-    }
+  isInRenewal(l: Licence): boolean {
+    return this.carts.get(l.plan.tier)?.hasRenewal(l) ?? false;
+  }
+
+  getCart(plan: Plan): Cart | undefined {
+    return this.carts.get(plan.tier);
   }
 }

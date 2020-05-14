@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/data/schema/product';
-import { products } from 'src/app/data/mock';
+import { Product, Plan } from 'src/app/data/schema/product';
+import { CartService } from 'src/app/data/service/cart.service';
+import { Tier } from 'src/app/data/schema/enum';
 
 @Component({
   selector: 'app-products',
@@ -9,11 +10,21 @@ import { products } from 'src/app/data/mock';
 })
 export class ProductsComponent implements OnInit {
 
-  products: Product[] = products;
+  products: Product[];
 
-  constructor() { }
+  constructor(
+    readonly cartService: CartService
+  ) { }
 
   ngOnInit(): void {
+    this.products = this.cartService.getProducts();
   }
 
+  addSubs(plan: Plan) {
+    this.cartService.addNewSubs(plan);
+  }
+
+  getCount(plan: Plan): number {
+    return this.cartService.getCart(plan)?.count ?? 0;
+  }
 }

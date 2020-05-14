@@ -1,5 +1,6 @@
-import { Plan, Discount } from './product';
+import { Plan, Discount, DiscountedPlan } from './product';
 import { Licence } from './licence';
+import { Tier } from './enum';
 
 function findDiscount(plan: Plan, quantity: number): Discount {
   if (plan.discounts.length === 0) {
@@ -17,7 +18,7 @@ function findDiscount(plan: Plan, quantity: number): Discount {
 
   for (const current of plan.discounts) {
     if (quantity >= target.threshold && quantity < current.threshold) {
-      return current;
+      return target;
     }
 
     target = current;
@@ -26,36 +27,87 @@ function findDiscount(plan: Plan, quantity: number): Discount {
   return target;
 }
 
+function buildDiscountedPlan(plan: Plan, quantity): DiscountedPlan {
+  const discount = findDiscount(plan, quantity);
+
+  return {
+    id: plan.id,
+    price: plan.price,
+    tier: plan.tier,
+    cycle: plan.cycle,
+    ...discount,
+  };
+}
+
+const cartTitles: Record<Tier, string> = {
+  standard: '标准版',
+  premium: '高端版'
+};
+
 export class Cart {
   newSubs = 0;
-  renewalIds: Set<string> = new Set();
+  discount: Discount;
+  renewals: Map<string, Licence> = new Map();
 
-  constructor(private plan: Plan) {}
+  constructor(public plan: Plan) {
+    this.discount = findDiscount(plan, 0);
+  }
 
   setPlan(p: Plan) {
     this.plan = p;
+    this.updateDiscount();
   }
 
   addNewSubs() {
     this.newSubs += 1;
+    this.updateDiscount();
+  }
+
+  setNewSubs(copies: number) {
+    if (copies < 0) {
+      return;
+    }
+
+    this.newSubs = copies;
+    this.updateDiscount();
   }
 
   addRenewal(l: Licence) {
-    this.renewalIds.add(l.id);
+    this.renewals.set(l.id, l);
+    this.updateDiscount();
   }
 
+  hasRenewal(l: Licence): boolean {
+    return this.renewals.has(l.id);
+  }
+
+  private updateDiscount() {
+    this.discount = findDiscount(this.plan, this.count);
+  }
+
+  get title(): string {
+    return cartTitles[this.plan.tier];
+  }
+
+  // Total licence to buy.
   get count(): number {
-    return this.newSubs + this.renewalIds.size;
+    return this.newSubs + this.renewals.size;
   }
 
-  get discountedPrice(): number {
-    const discount = findDiscount(this.plan, this.count);
+  get formattedUnitPrice(): string {
+    if (this.discount.priceOff === 0) {
+      return `${this.plan.price}`;
+    }
 
-    return this.plan.price - discount.priceOff;
+    return `${this.plan.price} - ${this.discount.priceOff}`;
+  }
+
+  get unitPrice(): number {
+    return this.plan.price - this.discount.priceOff;
   }
 
   get totalAmount(): number {
-    return this.count * this.discountedPrice;
+    return this.count * this.unitPrice;
   }
 }
 

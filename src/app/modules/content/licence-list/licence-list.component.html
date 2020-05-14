@@ -18,7 +18,6 @@
             <span>{{lic.plan.tier}}</span>
 
             <button type="button">续订</button>
-            <button *ngIf="lic.plan.tier === 'standard'">升级</button>
           </td>
           <ng-container [ngSwitch]="lic.status">
             <td *ngSwitchCase="'available'">
@@ -41,6 +40,11 @@
   </div>
 
   <div class="col-md-12 col-lg-3">
+    <h5>续订</h5>
+    <ul>
+      <li>每份许可仅可续订下一年</li>
+      <li>如需续订多份许可，点击每份许可的续订按钮，添加到购物车后一次性结算</li>
+    </ul>
     <h5>许可状态</h5>
     <p>每份许可处于三种状态之一：</p>
     <ul>

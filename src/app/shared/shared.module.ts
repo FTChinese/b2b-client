@@ -4,16 +4,12 @@ import { DynamicControlComponent } from './dynamic-control/dynamic-control.compo
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { ButtonComponent } from './button/button.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CartComponent } from './cart/cart.component';
-
-
 
 @NgModule({
   declarations: [
     DynamicControlComponent,
     DynamicFormComponent,
     ButtonComponent,
-    CartComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +19,6 @@ import { CartComponent } from './cart/cart.component';
     DynamicControlComponent,
     DynamicFormComponent,
     ButtonComponent,
-    CartComponent,
   ]
 })
 export class SharedModule { }

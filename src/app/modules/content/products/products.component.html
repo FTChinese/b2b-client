@@ -6,61 +6,69 @@
       <div *ngFor="let product of products" class="col mt-3">
         <div class="card h-100">
           <div class="card-body">
-            <h3 class="card-title text-center mb-3 pb-3">{{product.heading}}</h3>
+            <h3 class="card-title text-center mb-3">{{product.heading}}</h3>
 
-            <div class="text-center mb-2">
-              <button type="button" class="btn btn-primary btn-block">
-                ¥ {{ product.plan.price }}/许可
-              </button>
+            <div class="text-center mb-2 border-bottom">
+              ¥ {{ product.plan.price }}/年
             </div>
 
             <ul>
               <li *ngFor="let line of product.description">{{ line }}</li>
             </ul>
             <small *ngIf="product.smallPrint">{{product.smallPrint}}</small>
-          </div><!-- End of card body -->
 
-          <div class="card-footer">
-            <h5>折扣方案</h5>
+            <h5 class="text-center">折扣方案</h5>
             <ul>
               <li *ngFor="let item of product.plan.discounts">满{{item.threshold}}份每份减{{item.priceOff}}</li>
             </ul>
-            <p ></p>
+          </div><!-- End of card body -->
+
+          <div class="card-footer text-center">
+            <button
+              type="button"
+              class="btn btn-primary add-to-cart"
+              (click)="addSubs(product.plan)">
+              <span>加入购物车 </span>
+              <span *ngIf="getCount(product.plan)" class="badge badge-success">
+                {{getCount(product.plan)}}
+              </span>
+            </button>
+
+
           </div> <!-- End of card footer -->
 
         </div><!-- End of card -->
 
       </div><!-- End of a product -->
     </div><!-- End of products row -->
+
+    <div class="mt-3">
+      <h4>B2B订阅方式说明</h4>
+      <ol>
+        <li>B2B订阅采取许可购买授权模式</li>
+        <li>选择订阅的产品，添加到购物车，在购物车中修改需要订阅的份数</li>
+        <li>提交后联系我方客服协商支付事宜，我方收到款项后为您创建对应份数许可</li>
+        <li>通过左侧导航栏“许可”查看每份许可的状态</li>
+      </ol>
+      <h4>如何授权给所属机构成员？</h4>
+      <ol>
+        <li>选择需要授权的许可</li>
+        <li>点击发送邀请</li>
+        <li>在对话框中输入接受者的邮箱</li>
+        <li>接受人收到邮件后，点击邮件中的链接，在打开的网页中选择接受授权</li>
+        <li>每个许可同一时间仅供一人使用</li>
+        <li>在许可管理中，你可以随时收回已授权的许可，此用户的成员状态会即刻取消</li>
+      </ol>
+    </div>
+
   </div><!-- End of middle column -->
 
   <div class="col-md-12 col-lg-4">
-    <app-cart></app-cart>
-
-    <h4>B2B订阅方式说明</h4>
-    <ol>
-      <li>B2B订阅采取许可购买授权模式</li>
-      <li>选择订阅的产品，添加到购物车，在购物车中修改需要订阅的份数</li>
-      <li>提交后联系我方客服协商支付事宜，我方收到款项后为您创建对应份数许可</li>
-      <li>通过左侧导航栏“许可”查看每份许可的状态</li>
-    </ol>
-    <h4>如何授权给所属机构成员？</h4>
-    <ol>
-      <li>选择需要授权的许可</li>
-      <li>点击发送邀请</li>
-      <li>在对话框中输入接受者的邮箱</li>
-      <li>接受人收到邮件后，点击邮件中的链接，在打开的网页中选择接受授权</li>
-      <li>每个许可同一时间仅供一人使用</li>
-      <li>在许可管理中，你可以随时收回已授权的许可，此用户的成员状态会即刻取消</li>
-    </ol>
+    <h4 class="text-center">
+      <a href="/checkout">购物车 </a>
+      <span>{{cartService.totalItems}}</span>
+    </h4>
   </div><!-- End of right column -->
 </div>
 
-<div class="container">
-
-
-
-
-
-</div>
 

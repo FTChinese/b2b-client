@@ -13,6 +13,8 @@ export interface Plan {
   discounts: Discount[];
 }
 
+export type DiscountedPlan = Omit<Plan, 'discounts'> & Discount;
+
 export interface Product {
   id: string;
   tier: Tier;

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { licences } from 'src/app/data/mock';
+import { CartService } from 'src/app/data/service/cart.service';
+import { Licence } from 'src/app/data/schema/licence';
 
 @Component({
   selector: 'app-licence-list',
@@ -10,9 +12,14 @@ export class LicenceListComponent implements OnInit {
 
   readonly licences = licences;
 
-  constructor() { }
+  constructor(
+    readonly cartService: CartService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  renew(l: Licence) {
+    this.cartService.addRenewal(l);
+  }
 }
