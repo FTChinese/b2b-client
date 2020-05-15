@@ -1,6 +1,6 @@
 import { Plan, Discount, DiscountedPlan } from './product';
 import { Licence } from './licence';
-import { Tier } from './enum';
+import { tiers } from './localization';
 
 function findDiscount(plan: Plan, quantity: number): Discount {
   if (plan.discounts.length === 0) {
@@ -38,11 +38,6 @@ function buildDiscountedPlan(plan: Plan, quantity): DiscountedPlan {
     ...discount,
   };
 }
-
-const cartTitles: Record<Tier, string> = {
-  standard: '标准版',
-  premium: '高端版'
-};
 
 export class Cart {
   newSubs = 0;
@@ -86,7 +81,7 @@ export class Cart {
   }
 
   get title(): string {
-    return cartTitles[this.plan.tier];
+    return tiers[this.plan.tier];
   }
 
   // Total licence to buy.
