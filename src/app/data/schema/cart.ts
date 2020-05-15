@@ -1,10 +1,11 @@
-import { Plan, Discount, DiscountedPlan } from './product';
+import { Plan, Discount } from './product';
 import { Licence } from './licence';
 import { tiers } from './localization';
 
 function findDiscount(plan: Plan, quantity: number): Discount {
   if (plan.discounts.length === 0) {
     return {
+      id: 0,
       threshold: 0,
       priceOff: 0
     };
@@ -14,7 +15,7 @@ function findDiscount(plan: Plan, quantity: number): Discount {
     return plan.discounts[plan.discounts.length - 1];
   }
 
-  let target: Discount = { threshold: 0, priceOff: 0 };
+  let target: Discount = { id: 0, threshold: 0, priceOff: 0 };
 
   for (const current of plan.discounts) {
     if (quantity >= target.threshold && quantity < current.threshold) {
@@ -27,16 +28,11 @@ function findDiscount(plan: Plan, quantity: number): Discount {
   return target;
 }
 
-function buildDiscountedPlan(plan: Plan, quantity): DiscountedPlan {
-  const discount = findDiscount(plan, quantity);
-
-  return {
-    id: plan.id,
-    price: plan.price,
-    tier: plan.tier,
-    cycle: plan.cycle,
-    ...discount,
-  };
+export interface CartItem {
+  planId: string;
+  discountId: number | null;
+  create: number;
+  renewal: string[];
 }
 
 export class Cart {
@@ -103,6 +99,16 @@ export class Cart {
 
   get totalAmount(): number {
     return this.count * this.unitPrice;
+  }
+
+  json(): CartItem {
+    return {
+      planId: this.plan.id,
+      discountId: this.discount.id,
+      create: this.newSubs,
+      renewal: Array.from(this.renewals.values())
+        .map(licence => licence.id),
+    };
   }
 }
 
