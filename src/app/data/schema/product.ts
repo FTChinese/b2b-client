@@ -1,19 +1,21 @@
 import { Tier, Cycle } from './enum';
 
 export interface Discount {
+  id: number;
   threshold: number;
   priceOff: number;
 }
 
-export interface Plan {
+export interface BasePlan {
   id: string;
   price: number;
   tier: Tier;
   cycle: Cycle;
-  discounts: Discount[];
 }
 
-export type DiscountedPlan = Omit<Plan, 'discounts'> & Discount;
+export type Plan = BasePlan & {
+  discounts: Discount[];
+};
 
 export interface Product {
   id: string;
