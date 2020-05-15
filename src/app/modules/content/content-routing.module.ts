@@ -7,6 +7,7 @@ import { LicenceDetailComponent } from './licence-detail/licence-detail.componen
 import { InvitationComponent } from './invitation/invitation.component';
 import { StafferComponent } from './staffer/staffer.component';
 import { CartComponent } from './cart/cart.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'invitations',
     component: InvitationComponent
+  },
+  {
+    path: 'transactions',
+    component: TransactionComponent
   },
   {
     path: 'staff',

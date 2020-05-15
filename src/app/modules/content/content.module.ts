@@ -10,6 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { InvitationComponent } from './invitation/invitation.component';
 import { StafferComponent } from './staffer/staffer.component';
 import { CartComponent } from './cart/cart.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CartComponent } from './cart/cart.component';
     LicenceDetailComponent,
     InvitationComponent,
     StafferComponent,
-    CartComponent
+    CartComponent,
+    TransactionComponent
   ],
   imports: [
     CommonModule,

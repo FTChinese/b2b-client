@@ -22,12 +22,12 @@ export class NavComponent implements OnInit {
       href: '/invitations',
     },
     {
-      name: '成员',
-      href: '/staff',
-    },
-    {
       name: '交易历史',
       href: '/transactions',
+    },
+    {
+      name: '成员',
+      href: '/staff',
     },
     {
       name: '设置',
