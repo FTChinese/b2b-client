@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, Plan } from 'src/app/data/schema/product';
 import { CartService } from 'src/app/data/service/cart.service';
-import { Tier } from 'src/app/data/schema/enum';
 
 @Component({
   selector: 'app-products',
@@ -25,6 +24,6 @@ export class ProductsComponent implements OnInit {
   }
 
   getCount(plan: Plan): number {
-    return this.cartService.getCart(plan)?.count ?? 0;
+    return this.cartService.getCart(plan)?.newSubs ?? 0;
   }
 }

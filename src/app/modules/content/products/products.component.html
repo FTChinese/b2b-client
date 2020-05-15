@@ -9,7 +9,7 @@
             <h3 class="card-title text-center mb-3">{{product.heading}}</h3>
 
             <div class="text-center mb-2 border-bottom">
-              ¥ {{ product.plan.price }}/年
+              {{ product.plan.price | currency: 'CNY':'symbol-narrow' }}/{{product.plan.cycle | cycle}}
             </div>
 
             <ul>
