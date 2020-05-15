@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product, Plan } from '../schema/product';
 import { products } from '../mock';
-import { Cart } from '../schema/cart';
+import { Cart, CartItem } from '../schema/cart';
 import { Licence } from '../schema/licence';
 import { Tier } from '../schema/enum';
 
@@ -17,18 +17,7 @@ export class CartService {
   }
 
   get cartsArray(): Cart[] {
-    const c: Cart[] = [];
-    const std = this.carts.get('standard');
-    if (std) {
-      c.push(std);
-    }
-
-    const prm = this.carts.get('premium');
-    if (prm) {
-      c.push(prm);
-    }
-
-    return c;
+    return Array.from(this.carts.values());
   }
 
   get totalAmount(): number {
@@ -73,5 +62,10 @@ export class CartService {
 
   getCart(plan: Plan): Cart | undefined {
     return this.carts.get(plan.tier);
+  }
+
+  // Data that will be submitted to backend.
+  json(): CartItem[] {
+    return this.cartsArray.map(cart => cart.json());
   }
 }
