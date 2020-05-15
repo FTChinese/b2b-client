@@ -12,6 +12,10 @@ export class CartService {
 
   carts: Map<Tier, Cart> = new Map();
 
+  get initialized(): boolean {
+    return this.carts.has('standard') && this.carts.has('premium');
+  }
+
   get cartsArray(): Cart[] {
     const c: Cart[] = [];
     const std = this.carts.get('standard');
