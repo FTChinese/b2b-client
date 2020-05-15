@@ -4,6 +4,9 @@
   </ng-container>
 
   <div class="d-flex justify-content-between">
-    <app-button [button]="button" [disabled]="!form.valid"></app-button>
+    <button
+      [class]="button.classNames"
+      [type]="button.type"
+      [disabled]="!form.valid">{{button.name}}</button>
   </div>
 </form>
