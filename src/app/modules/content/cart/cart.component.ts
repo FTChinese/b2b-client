@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/data/service/cart.service';
+import { Licence } from 'src/app/data/schema/licence';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    readonly cartService: CartService
+  ) {
+    this.cartService.getProducts();
+    console.log(this.cartService);
+  }
 
   ngOnInit(): void {
   }
 
+  removeRenwal(l: Licence) {
+    this.cartService.removeRenwal(l);
+  }
 }

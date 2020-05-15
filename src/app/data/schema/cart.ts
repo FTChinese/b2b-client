@@ -68,16 +68,17 @@ export class Cart {
     this.updateDiscount();
   }
 
+  removeRenewal(l: Licence) {
+    this.renewals.delete(l.id);
+    this.updateDiscount();
+  }
+
   hasRenewal(l: Licence): boolean {
     return this.renewals.has(l.id);
   }
 
   private updateDiscount() {
     this.discount = findDiscount(this.plan, this.count);
-  }
-
-  get title(): string {
-    return tiers[this.plan.tier];
   }
 
   // Total licence to buy.
@@ -99,6 +100,10 @@ export class Cart {
 
   get totalAmount(): number {
     return this.count * this.unitPrice;
+  }
+
+  get renewalLicences(): Licence[] {
+    return Array.from(this.renewals.values());
   }
 
   json(): CartItem {

@@ -1,1 +1,65 @@
-<p>cart works!</p>
+<h2>购物车</h2>
+
+<ng-container *ngIf="cartService.totalItems; else elseBlock">
+  <div class="mb-2" *ngFor="let cart of cartService.cartsArray">
+    <ng-container *ngIf="cart.count">
+      <h5>{{cart.plan.tier | edition}} {{cart.plan.price | currency:'CNY':'symbol-narrow'}}/{{cart.plan.cycle | cycle}}</h5>
+
+      <table class="table">
+        <tbody>
+          <tr *ngIf="cart.newSubs">
+            <th>新增订阅</th>
+            <td>{{cart.newSubs}}</td>
+          </tr>
+          <tr *ngIf="cart.renewals.size">
+            <th>续订</th>
+            <td>{{cart.renewals.size}}</td>
+          </tr>
+          <tr>
+            <th>总计</th>
+            <td>{{cart.unitPrice}} x {{cart.count}} = {{cart.totalAmount}}</td>
+          </tr>
+          <tr *ngIf="cart.discount.priceOff">
+            <th></th>
+            <td>满{{cart.discount.threshold}}份每份减{{cart.discount.priceOff}}元</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table *ngIf="cart.renewals.size" class="table">
+        <caption>续订列表</caption>
+        <thead>
+          <tr>
+            <th>截止日期</th>
+            <th>使用者</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let lic of cart.renewalLicences">
+            <td>{{lic.expireDate}}</td>
+            <ng-container [ngSwitch]="lic.status">
+              <td *ngSwitchCase="'available'">
+                无
+              </td>
+              <td *ngSwitchCase="'invited'">
+                {{lic.lastInviteeEmail}} (尚未接受邀请)
+              </td>
+              <td *ngSwitchCase="'granted'">
+                {{lic.assignee.email}}
+              </td>
+            </ng-container>
+            <td><button type="button" (click)="removeRenwal(lic)">删除</button></td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #elseBlock>
+  <p>购物车空空～ <a routerLink="/products">去订阅</a> 或 <a routerLink="/licences">续订</a></p>
+</ng-template>
+

@@ -56,6 +56,10 @@ export class CartService {
     this.carts.get(l.plan.tier)?.addRenewal(l);
   }
 
+  removeRenwal(l: Licence) {
+    this.carts.get(l.plan.tier)?.removeRenewal(l);
+  }
+
   isInRenewal(l: Licence): boolean {
     return this.carts.get(l.plan.tier)?.hasRenewal(l) ?? false;
   }

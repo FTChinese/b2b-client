@@ -11,6 +11,10 @@ export class ProductsComponent implements OnInit {
 
   products: Product[];
 
+  // Pitfall: the link to shopping cart page must be
+  // set using Angular directive routerLink.
+  // If you use a plain href, the service disappears
+  // after to navigated to the shopping cart page.
   constructor(
     readonly cartService: CartService
   ) { }
