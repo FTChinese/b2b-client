@@ -2,6 +2,7 @@ import { Product, Plan } from './schema/product';
 import { Licence } from './schema/licence';
 import { Invitation } from './schema/invitation';
 import { Staffer } from './schema/assignee';
+import { Checkout } from './schema/transaction';
 
 export function randomString(): string {
   return Math.random().toString(36).substring(2, 15);
@@ -18,10 +19,12 @@ export const stdPlan: Plan = {
   cycle: 'year',
   discounts: [
     {
+      id: 1,
       threshold: 10,
       priceOff: 15
     },
     {
+      id: 2,
       threshold: 20,
       priceOff: 25
     }
@@ -35,10 +38,12 @@ export const prmPlan: Plan = {
   cycle: 'year',
   discounts: [
     {
+      id: 3,
       threshold: 10,
       priceOff: 100
     },
     {
+      id: 4,
       threshold: 20,
       priceOff: 200
     }
@@ -207,6 +212,52 @@ export const invitations: Invitation[] = [
   }
 ];
 
+export const checkouts: Checkout[] = [
+  {
+    id: `chk_${randomString()}`,
+    teamId,
+    totalAmount: 10000,
+    createdUtc,
+    status: 'paid',
+    confirmedUtc: createdUtc,
+    items: [
+      {
+        plan: stdPlan,
+        discount: stdPlan.discounts[0],
+        create: 10,
+        renewal: licences.map(l => l.id),
+      },
+      {
+        plan: prmPlan,
+        discount: prmPlan.discounts[1],
+        create: 5,
+        renewal: licences.map(l => l.id)
+      }
+    ]
+  },
+  {
+    id: `chk_${randomString()}`,
+    teamId,
+    totalAmount: 10000,
+    status: 'unpaid',
+    confirmedUtc: null,
+    createdUtc,
+    items: [
+      {
+        plan: stdPlan,
+        discount: stdPlan.discounts[0],
+        create: 10,
+        renewal: licences.map(l => l.id),
+      },
+      {
+        plan: prmPlan,
+        discount: prmPlan.discounts[1],
+        create: 5,
+        renewal: licences.map(l => l.id)
+      }
+    ]
+  }
+];
 
 export const staff: Staffer[] = [
   {
