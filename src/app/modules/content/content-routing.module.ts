@@ -6,6 +6,7 @@ import { LicenceListComponent } from './licence-list/licence-list.component';
 import { LicenceDetailComponent } from './licence-detail/licence-detail.component';
 import { InvitationComponent } from './invitation/invitation.component';
 import { StafferComponent } from './staffer/staffer.component';
+import { CartComponent } from './cart/cart.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'licences/:id',
     component: LicenceDetailComponent
+  },
+  {
+    path: 'cart',
+    component: CartComponent
   },
   {
     path: 'invitations',
