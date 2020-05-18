@@ -11,6 +11,7 @@ import { InvitationComponent } from './invitation/invitation.component';
 import { StafferComponent } from './staffer/staffer.component';
 import { CartComponent } from './cart/cart.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { InviteComponent } from './invite/invite.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TransactionComponent } from './transaction/transaction.component';
     InvitationComponent,
     StafferComponent,
     CartComponent,
-    TransactionComponent
+    TransactionComponent,
+    InviteComponent
   ],
   imports: [
     CommonModule,
