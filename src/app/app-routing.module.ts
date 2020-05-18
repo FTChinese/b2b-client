@@ -47,11 +47,11 @@ const routes: Routes = [
     ]
   },
   {
-    path: '**',
+    path: baseUrl,
     component: JumboLayoutComponent,
     children: [
       {
-        path: '',
+        path: '**',
         component: PageNotFoundComponent
       }
     ]
