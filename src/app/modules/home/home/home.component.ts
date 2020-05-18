@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { Team } from 'src/app/data/schema/form-data';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import { sitemap } from 'src/app/layout/sitemap';
 
 @Component({
   selector: 'app-home',
@@ -56,7 +57,7 @@ export class HomeComponent implements OnInit {
     .subscribe({
       next: data => {
         this.authService.createTeam(data);
-        this.router.navigate(['/products']);
+        this.router.navigate([`/${sitemap.products}`]);
       },
       error: err => {
         console.log(err);
