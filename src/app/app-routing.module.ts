@@ -10,9 +10,11 @@ import { TeamGuard } from './core/guard/team.guard';
 import { AuthModule } from './modules/auth/auth.module';
 import { ContentModule } from './modules/content/content.module';
 
+const baseUrl = 'b2b-client';
+
 const routes: Routes = [
   {
-    path: '',
+    path: baseUrl,
     canActivate: [AuthGuard],
     component: JumboLayoutComponent,
     children: [
@@ -24,7 +26,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: '',
+    path: baseUrl,
     component: ContentLayoutComponent,
     canActivate: [AuthGuard],
     children: [
@@ -35,7 +37,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: '',
+    path: baseUrl,
     component: AuthLayoutComponent,
     children: [
       {

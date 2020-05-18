@@ -54,8 +54,8 @@ export class ResetPasswordComponent implements OnInit {
   token: string; // The token acquired from url path.
   email: string; // The email linked to this password reset token.
 
-  forgotPwLink = `/${sitemap.forgotPassword.path}`;
-  loginLink = `/${sitemap.login.path}`;
+  forgotPwLink = `/${sitemap.forgotPassword}`;
+  loginLink = `/${sitemap.login}`;
 
   constructor(
     private route: ActivatedRoute,

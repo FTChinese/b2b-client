@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../service/auth.service';
+import { sitemap } from 'src/app/layout/sitemap';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class AuthGuard implements CanActivate {
     }
 
     this.authService.redirectUrl = url;
-    this.router.navigate(['/login']);
+    this.router.navigate([`/${sitemap.login}`]);
 
     return false;
   }

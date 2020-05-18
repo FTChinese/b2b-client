@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, Plan } from 'src/app/data/schema/product';
 import { CartService } from 'src/app/data/service/cart.service';
+import { sitemap } from 'src/app/layout/sitemap';
 
 @Component({
   selector: 'app-products',
@@ -8,6 +9,8 @@ import { CartService } from 'src/app/data/service/cart.service';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+
+  cartLink = `/${sitemap.cart}`;
 
   products: Product[];
 

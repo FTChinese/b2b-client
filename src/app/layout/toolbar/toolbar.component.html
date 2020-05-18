@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="/">FT中文网B2B订阅服务</a>
 
     <div class="d-flx align-items-center" *ngIf="authService.isLoggedIn">
-      <a class="" routerLink="/settings">{{authService.displayName}}</a>
+      <a class="" [routerLink]="settingsUrl">{{authService.displayName}}</a>
 
       <button class="btn btn-link" (click)="logout()">Logout</button>
     </div>

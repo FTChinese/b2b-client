@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Link } from 'src/app/shared/widget/link';
+import { sitemap } from '../sitemap';
 
 @Component({
   selector: 'app-nav',
@@ -11,27 +12,27 @@ export class NavComponent implements OnInit {
   navItems: Link[] = [
     {
       name: '购买',
-      href: '/products'
+      href: `/${sitemap.products}`
     },
     {
       name: '许可',
-      href: '/licences'
+      href: `/${sitemap.licences}`
     },
     {
       name: '邀请',
-      href: '/invitations',
+      href: `/${sitemap.invitations}`,
     },
     {
       name: '交易历史',
-      href: '/transactions',
+      href: `/${sitemap.transactions}`,
     },
     {
       name: '成员',
-      href: '/staff',
+      href: `/${sitemap.staff}`,
     },
     {
       name: '设置',
-      href: '/settings'
+      href: `/${sitemap.settings}`
     }
   ];
 

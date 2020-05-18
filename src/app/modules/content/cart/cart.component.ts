@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/data/service/cart.service';
 import { Licence } from 'src/app/data/schema/licence';
 import { Plan } from 'src/app/data/schema/product';
+import { sitemap } from 'src/app/layout/sitemap';
 
 @Component({
   selector: 'app-cart',
@@ -9,6 +10,9 @@ import { Plan } from 'src/app/data/schema/product';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+
+  productsLink = `/${sitemap.products}`;
+  licencesLink = `/${sitemap.licences}`;
 
   constructor(
     readonly cartService: CartService

@@ -31,7 +31,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   // Indicates whether email is sent.
   done = false;
-  loginLink = `/${sitemap.login.path}`;
+  loginLink = `/${sitemap.login}`;
 
   constructor(
     private formService: FormService,

@@ -20,7 +20,7 @@
         <span>{{inv.status}}</span>
         <button *ngIf="inv.status === 'created'" type="button">撤回</button>
       </td>
-      <td><a [routerLink]="['../licences', inv.licenceId]">查看许可</a></td>
+      <td><a [routerLink]="[licencesLink, inv.licenceId]">查看许可</a></td>
     </tr>
   </tbody>
 </table>

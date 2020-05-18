@@ -3,6 +3,7 @@ import { licences } from 'src/app/data/mock';
 import { CartService } from 'src/app/data/service/cart.service';
 import { Licence } from 'src/app/data/schema/licence';
 import { Product } from 'src/app/data/schema/product';
+import { sitemap } from 'src/app/layout/sitemap';
 
 @Component({
   selector: 'app-licence-list',
@@ -10,6 +11,8 @@ import { Product } from 'src/app/data/schema/product';
   styleUrls: ['./licence-list.component.scss']
 })
 export class LicenceListComponent implements OnInit {
+
+  cartLink = `/${sitemap.cart}`;
 
   readonly licences = licences;
   products: Product[];
