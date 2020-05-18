@@ -60,7 +60,7 @@
 
     <div class="pt-5 d-flex justify-content-between" *ngIf="this.cartService.totalAmount">
       <span class="text-center">应付总额 {{this.cartService.totalAmount | currency:'CNY':'symbol-narrow'}}</span>
-      <button class="btn btn-primary" (click)="checkout()">结算</button>
+      <a class="btn btn-primary" [routerLink]="checkoutLink">结算</a>
     </div>
   </ng-container>
 

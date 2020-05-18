@@ -8,6 +8,7 @@ import { InvitationComponent } from './invitation/invitation.component';
 import { StafferComponent } from './staffer/staffer.component';
 import { CartComponent } from './cart/cart.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent
+  },
+  {
+    path: 'cart/checkout',
+    component: CheckoutComponent
   },
   {
     path: 'invitations',

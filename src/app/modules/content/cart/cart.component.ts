@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
 
   productsLink = `/${sitemap.products}`;
   licencesLink = `/${sitemap.licences}`;
+  checkoutLink = `./checkout`;
 
   constructor(
     readonly cartService: CartService
@@ -33,6 +34,6 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    console.log(this.cartService.json);
+    console.log(this.cartService.json());
   }
 }
