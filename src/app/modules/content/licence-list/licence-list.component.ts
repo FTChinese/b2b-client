@@ -13,7 +13,6 @@ export class LicenceListComponent implements OnInit {
 
   readonly licences = licences;
   products: Product[];
-  cartLink = '/cart';
 
   constructor(
     readonly cartService: CartService
