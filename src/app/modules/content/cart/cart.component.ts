@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/data/service/cart.service';
 import { Licence } from 'src/app/data/schema/licence';
+import { Plan } from 'src/app/data/schema/product';
 
 @Component({
   selector: 'app-cart',
@@ -17,6 +18,10 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  setNewSubs(plan: Plan, copies: string) {
+    this.cartService.setNewSubs(plan, Number.parseInt(copies, 10) ?? -1);
   }
 
   removeRenwal(l: Licence) {
