@@ -27,4 +27,8 @@ export class CartComponent implements OnInit {
   removeRenwal(l: Licence) {
     this.cartService.removeRenwal(l);
   }
+
+  checkout() {
+    console.log(this.cartService.json);
+  }
 }
