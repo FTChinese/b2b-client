@@ -52,6 +52,10 @@ export class CartService {
     this.carts.get(plan.tier)?.addNewSubs();
   }
 
+  setNewSubs(plan: Plan, copies: number) {
+    this.carts.get(plan.tier)?.setNewSubs(copies);
+  }
+
   addRenewal(l: Licence) {
     this.carts.get(l.plan.tier)?.addRenewal(l);
   }
