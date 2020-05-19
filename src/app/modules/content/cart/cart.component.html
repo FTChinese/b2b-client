@@ -1,4 +1,4 @@
-<div class="cart-container">
+<div class="w-xl-50">
   <h2 class="text-center">购物车</h2>
 
   <ng-container *ngIf="cartService.totalItems; else elseBlock">
@@ -15,6 +15,7 @@
             #newSubs
             style="width: 3em;"
             type="number"
+            [disabled]="disabled"
             [value]="cart.newSubs"
             (change)="setNewSubs(cart.plan, newSubs.value)" />
         </div>
@@ -59,8 +60,14 @@
     </ng-container>
 
     <div class="pt-5 d-flex justify-content-between" *ngIf="this.cartService.totalAmount">
+
       <span class="text-center">应付总额 {{this.cartService.totalAmount | currency:'CNY':'symbol-narrow'}}</span>
-      <a class="btn btn-primary" [routerLink]="checkoutLink">结算</a>
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="checkout()"
+        [disabled]="disabled">结算</button>
     </div>
   </ng-container>
 
@@ -68,5 +75,6 @@
     <p class="text-center">购物车空空～ <a [routerLink]="productsLink">去订阅</a> 或 <a [routerLink]="licencesLink">续订</a></p>
   </ng-template>
 </div> <!-- End cart container -->
+
 
 

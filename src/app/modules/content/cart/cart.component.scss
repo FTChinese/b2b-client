@@ -1,14 +1,3 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-
 table {
   width: auto;
-}
-
-@include media-breakpoint-up(lg) {
-  .cart-container {
-    width: 50%;
-    margin: 0 auto;
-  }
 }
