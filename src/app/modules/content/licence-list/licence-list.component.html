@@ -20,9 +20,8 @@
             <button
               type="button"
               class="btn btn-link"
-              [class.addedToCart]="isInRenewList(lic)"
               (click)="renew(lic)"
-              [disabled]="disableRenew(lic)">
+              [disabled]="isInRenewList(lic)">
               续订
             </button>
           </td>
@@ -48,11 +47,6 @@
 
   <div class="col-md-12 col-lg-3">
 
-    <h4 class="text-center">
-      <a [routerLink]="cartLink">购物车 </a>
-      <span>{{cartService.totalItems}}</span>
-    </h4>
-
     <div class="card mt-3" *ngFor="let product of products">
       <div class="card-body">
         <h3 class="card-title text-center">{{product.heading}}</h3>
@@ -64,19 +58,23 @@
       </div><!-- End of card body -->
     </div><!-- End of card -->
 
-    <h5 class="mt-3">续订</h5>
-    <ul>
-      <li>每份许可仅可续订下一年</li>
-      <li>如需续订多份许可，点击每份许可的续订按钮，添加到购物车后一次性结算</li>
-      <li>折扣方案同新订阅</li>
-    </ul>
-    <h5>许可状态</h5>
-    <p>每份许可处于三种状态之一：</p>
-    <ul>
-      <li>未使用：此时您可以发送邀请给所属机构成员，接受者邀请邮件后点击邮件内的链接可以获得该许可；</li>
-      <li>已邀请：您已经发送了邀请邮件而接受者尚未接受期间，可以撤回邀请</li>
-      <li>已授权：被邀请人已经接受了该许可，此时您可以撤销授权，使用者的会员状态将被收回。</li>
-    </ul>
-    <p>一份许可在任何时间段仅供一位用户使用。</p>
+    <div>
+      <h5 class="mt-3 border-bottom">续订</h5>
+      <ul>
+        <li>每份许可仅可续订下一年</li>
+        <li>如需续订多份许可，点击每份许可的续订按钮，添加到购物车后一次性结算</li>
+        <li>折扣方案同新订阅</li>
+      </ul>
+      <h5 class="border-bottom">许可状态</h5>
+      <p>每份许可处于三种状态之一：</p>
+      <ul>
+        <li>未使用：此时您可以发送邀请给所属机构成员，接受者邀请邮件后点击邮件内的链接可以获得该许可；</li>
+        <li>已邀请：您已经发送了邀请邮件而接受者尚未接受期间，可以撤回邀请</li>
+        <li>已授权：被邀请人已经接受了该许可，此时您可以撤销授权，使用者的会员状态将被收回。</li>
+      </ul>
+      <p>一份许可在任何时间段仅供一位用户使用。</p>
+    </div>
+
+    <app-customer-service></app-customer-service>
   </div>
 </div>
