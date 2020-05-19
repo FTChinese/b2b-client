@@ -10,11 +10,7 @@ import { Tier } from '../schema/enum';
 })
 export class CartService {
 
-  carts: Map<Tier, Cart> = new Map();
-
-  get initialized(): boolean {
-    return this.carts.has('standard') && this.carts.has('premium');
-  }
+  private carts: Map<Tier, Cart> = new Map();
 
   get cartsArray(): Cart[] {
     return Array.from(this.carts.values());
@@ -32,17 +28,17 @@ export class CartService {
       .reduce((prev, curr) => prev + curr, 0);
   }
 
-  constructor() { }
+  constructor() {
+    this.carts.set('standard', new Cart());
+    this.carts.set('premium', new Cart());
+  }
 
   getProducts(): Product[] {
 
     products.forEach(product => {
-      const cart = this.carts.get(product.plan.tier);
-      if (cart) {
-        cart.setPlan(product.plan);
-      } else {
-        this.carts.set(product.plan.tier, new Cart(product.plan));
-      }
+      this.carts
+        .get(product.plan.tier)
+        .setPlan(product.plan);
     });
 
     return products;
@@ -64,12 +60,21 @@ export class CartService {
     this.carts.get(l.plan.tier)?.removeRenewal(l);
   }
 
-  isInRenewal(l: Licence): boolean {
-    return this.carts.get(l.plan.tier)?.hasRenewal(l) ?? false;
+  clearCarts() {
+    this.carts.forEach(cart => {
+      cart.clear();
+    });
   }
 
-  getCart(plan: Plan): Cart | undefined {
-    return this.carts.get(plan.tier);
+  getCart(plan: Plan): Cart {
+    let c = this.carts.get(plan.tier);
+    if (c) {
+      return c;
+    }
+
+    c = new Cart().setPlan(plan);
+    this.carts.set(plan.tier, c);
+    return c;
   }
 
   // Data that will be submitted to backend.

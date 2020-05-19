@@ -1,21 +1,24 @@
 import { Plan, Discount } from './product';
 import { Licence } from './licence';
-import { tiers } from './localization';
+
+function zeroDiscount(): Discount {
+  return {
+    id: 0,
+    threshold: 0,
+    priceOff: 0
+  };
+}
 
 function findDiscount(plan: Plan, quantity: number): Discount {
   if (plan.discounts.length === 0) {
-    return {
-      id: 0,
-      threshold: 0,
-      priceOff: 0
-    };
+    return zeroDiscount();
   }
 
   if (quantity >= plan.discounts[plan.discounts.length - 1].threshold) {
     return plan.discounts[plan.discounts.length - 1];
   }
 
-  let target: Discount = { id: 0, threshold: 0, priceOff: 0 };
+  let target: Discount = zeroDiscount();
 
   for (const current of plan.discounts) {
     if (quantity >= target.threshold && quantity < current.threshold) {
@@ -36,21 +39,21 @@ export interface CartItem {
 }
 
 export class Cart {
+  plan?: Plan;
   newSubs = 0;
-  discount: Discount;
+  discount: Discount = zeroDiscount();
   renewals: Map<string, Licence> = new Map();
 
-  constructor(public plan: Plan) {
-    this.discount = findDiscount(plan, 0);
-  }
+  constructor() { }
 
-  setPlan(p: Plan) {
+  setPlan(p: Plan): Cart {
     this.plan = p;
     this.updateDiscount();
+    return this;
   }
 
   addNewSubs() {
-    this.newSubs += 1;
+    this.newSubs = (+this.newSubs) + 1;
     this.updateDiscount();
   }
 
@@ -59,7 +62,7 @@ export class Cart {
       return;
     }
 
-    this.newSubs = copies;
+    this.newSubs = +copies;
     this.updateDiscount();
   }
 
@@ -77,8 +80,15 @@ export class Cart {
     return this.renewals.has(l.id);
   }
 
+  clear() {
+    this.newSubs = 0;
+    this.renewals.clear();
+  }
+
   private updateDiscount() {
-    this.discount = findDiscount(this.plan, this.count);
+    if (this.plan) {
+      this.discount = findDiscount(this.plan, this.count);
+    }
   }
 
   // Total licence to buy.
@@ -95,11 +105,11 @@ export class Cart {
   }
 
   get unitPrice(): number {
-    return this.plan.price - this.discount.priceOff;
+    return (+this.plan.price) - (+this.discount.priceOff);
   }
 
   get totalAmount(): number {
-    return this.count * this.unitPrice;
+    return this.count * (+this.unitPrice);
   }
 
   get renewalLicences(): Licence[] {
@@ -109,7 +119,7 @@ export class Cart {
   json(): CartItem {
     return {
       planId: this.plan.id,
-      discountId: this.discount.id,
+      discountId: this.discount.id || null,
       create: this.newSubs,
       renewal: Array.from(this.renewals.values())
         .map(licence => licence.id),
