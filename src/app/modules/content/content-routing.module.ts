@@ -9,12 +9,19 @@ import { StafferComponent } from './staffer/staffer.component';
 import { CartComponent } from './cart/cart.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { LayoutComponent } from './layout/layout.component';
 
 
 const routes: Routes = [
   {
     path: 'products',
-    component: ProductsComponent
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        component: ProductsComponent
+      }
+    ]
   },
   {
     path: 'licences',
@@ -26,11 +33,17 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    component: CartComponent
-  },
-  {
-    path: 'cart/checkout',
-    component: CheckoutComponent
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        component: CartComponent
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent
+      }
+    ]
   },
   {
     path: 'invitations',

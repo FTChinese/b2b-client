@@ -13,6 +13,8 @@ import { CartComponent } from './cart/cart.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { InviteComponent } from './invite/invite.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CustomerServiceComponent } from './customer-service/customer-service.component';
+import { LayoutComponent } from './layout/layout.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
     CartComponent,
     TransactionComponent,
     InviteComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CustomerServiceComponent,
+    LayoutComponent
   ],
   imports: [
     CommonModule,
