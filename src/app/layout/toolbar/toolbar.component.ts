@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Router } from '@angular/router';
-import { sitemap } from '../sitemap';
+import { sitemap, basePath } from '../sitemap';
+import { CartService } from 'src/app/data/service/cart.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,10 +12,13 @@ import { sitemap } from '../sitemap';
 export class ToolbarComponent implements OnInit {
 
   settingsUrl = `/${sitemap.settings}`;
+  cartUrl = `/${sitemap.cart}`;
+  homeUrl = `/${basePath}`;
 
   constructor(
-    public authService: AuthService,
+    readonly authService: AuthService,
     private route: Router,
+    readonly cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +26,6 @@ export class ToolbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.route.navigateByUrl('/login');
+    this.route.navigateByUrl(`/${sitemap.login}`);
   }
 }
