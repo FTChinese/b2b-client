@@ -28,40 +28,14 @@ a {
   border-radius: 0;
 }
 
+@import "width.scss";
 @import "header";
+@import "badge";
 @import "sidebar";
 @import "card";
 @import "button";
 @import "form";
 @import "list";
-
 @import "barrier";
 @import "aspect";
 @import "footer";
-
-.pay-result {
-    display: none;
-}
-.pay-result svg {
-    width: 4em;
-    height: 4em;
-}
-.pay-result.show {
-    display: block;
-}
-
-.global-spinner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -1rem;
-  margin-left: -1rem;
-}
-.spinner-border {
-  &[aria-hidden="true"] {
-    display: none;
-  }
-  &[aria-hidden="false"] {
-    display: inline-block;
-  }
-}
