@@ -28,7 +28,9 @@
           <ng-container [ngSwitch]="lic.status">
             <td *ngSwitchCase="'available'">
               <span>未使用</span>
-              <button type="button">发送邀请</button>
+              <button
+                type="button"
+                (click)="showGrantDialog(lic)">发送邀请</button>
             </td>
             <td *ngSwitchCase="'invited'">
               <span>已邀请 {{lic.lastInviteeEmail}}</span>
@@ -78,3 +80,5 @@
     <app-customer-service></app-customer-service>
   </div>
 </div>
+
+<app-invite *ngIf="grant" [licence]="grant"></app-invite>

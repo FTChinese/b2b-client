@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from 'src/app/shared/service/form.service';
 import { DynamicControl, InputControl } from 'src/app/shared/widget/control';
 import { Validators } from '@angular/forms';
 import { Button } from 'src/app/shared/widget/button';
@@ -7,14 +6,16 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { Credentials } from 'src/app/data/schema/form-data';
 import { sitemap } from 'src/app/layout/sitemap';
+import { RequestError } from 'src/app/data/schema/request-result';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [FormService]
 })
 export class LoginComponent implements OnInit {
+
+  apiErrors: RequestError;
 
   dynamicControls: DynamicControl[] = [
     new InputControl({
@@ -39,17 +40,16 @@ export class LoginComponent implements OnInit {
   signUpLink = `/${sitemap.signUp}`;
 
   constructor(
-    private formService: FormService,
     private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.formService.formSubmitted$.subscribe(data => {
-      console.log(data);
-      const credentials: Credentials = JSON.parse(data);
-      this.login(credentials);
-    });
+  }
+
+  onSubmitted(data: string) {
+    const credentials: Credentials = JSON.parse(data);
+    this.login(credentials);
   }
 
   private login(c: Credentials) {

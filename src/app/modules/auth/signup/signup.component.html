@@ -2,4 +2,6 @@
 
 <app-dynamic-form
   [controls]="dynamicControls"
-  [button]="button"></app-dynamic-form>
+  [button]="button"
+  (submitted)="onSubmitted($event)"
+  [errors]="apiErrors"></app-dynamic-form>

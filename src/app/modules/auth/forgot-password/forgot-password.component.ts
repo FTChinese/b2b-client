@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { DynamicControl, InputControl } from 'src/app/shared/widget/control';
 import { Validators } from '@angular/forms';
 import { Button } from 'src/app/shared/widget/button';
-import { FormService } from 'src/app/shared/service/form.service';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Email } from 'src/app/data/schema/form-data';
 import { sitemap } from 'src/app/layout/sitemap';
+import { RequestError } from 'src/app/data/schema/request-result';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
-  providers: [FormService],
 })
 export class ForgotPasswordComponent implements OnInit {
 
@@ -33,16 +32,17 @@ export class ForgotPasswordComponent implements OnInit {
   done = false;
   loginLink = `/${sitemap.login}`;
 
+  apiErrors: RequestError;
+
   constructor(
-    private formService: FormService,
     private authService: AuthService,
   ) { }
 
-  ngOnInit(): void {
-    this.formService.formSubmitted$.subscribe(data => {
-      const formData: Email = JSON.parse(data);
-      console.log(formData);
-      this.done = true;
-    });
+  ngOnInit(): void {}
+
+  onSubmitted(data: string) {
+    const formData: Email = JSON.parse(data);
+    console.log(formData);
+    this.done = true;
   }
 }

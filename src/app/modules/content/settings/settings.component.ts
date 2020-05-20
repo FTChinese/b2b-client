@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { DynamicControl, InputControl } from 'src/app/shared/widget/control';
 import { Button } from 'src/app/shared/widget/button';
 import { Validators } from '@angular/forms';
-import { FormService } from 'src/app/shared/service/form.service';
+import { RequestError } from 'src/app/data/schema/request-result';
+import { Team, PwChangeForm } from 'src/app/data/schema/form-data';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
-  providers: [FormService]
 })
 export class SettingsComponent implements OnInit {
 
@@ -39,6 +39,9 @@ export class SettingsComponent implements OnInit {
 
   button: Button = Button.primary().setName('保存');
 
+  teamErrors: RequestError;
+  pwErrors: RequestError;
+
   constructor(
   ) { }
 
@@ -64,4 +67,15 @@ export class SettingsComponent implements OnInit {
     ];
   }
 
+  onChangeTeam(data: string) {
+    const team: Team = JSON.parse(data);
+
+    console.log(team);
+  }
+
+  onChangePassword(data: string) {
+    const formData: PwChangeForm  = JSON.parse(data);
+
+    console.log(formData);
+  }
 }

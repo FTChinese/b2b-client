@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Router } from '@angular/router';
-import { sitemap, basePath } from '../sitemap';
+import { sitemap } from '../sitemap';
 import { CartService } from 'src/app/data/service/cart.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class ToolbarComponent implements OnInit {
 
   settingsUrl = `/${sitemap.settings}`;
   cartUrl = `/${sitemap.cart}`;
-  homeUrl = `/${basePath}`;
+  homeUrl = `/`;
 
   constructor(
     readonly authService: AuthService,

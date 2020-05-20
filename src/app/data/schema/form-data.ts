@@ -3,6 +3,10 @@ export interface Email {
   email: string;
 }
 
+interface OldPassword {
+  oldPassword: string;
+}
+
 interface Password {
   password: string;
 }
@@ -27,7 +31,17 @@ export type ResettingPassword = Password & {
   token: string;
 };
 
+export type PwChangeForm = OldPassword & Password & ConfirmPassword;
+
+export type ChangingPassword = OldPassword & Password;
+
 export interface Team {
   name: string;
   invoiceTitle: string;
+}
+
+export interface Invite {
+  email: string;
+  description: string | null;
+  licenceId: string;
 }

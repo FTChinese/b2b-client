@@ -2,19 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { DynamicControl, InputControl } from 'src/app/shared/widget/control';
 import { Validators } from '@angular/forms';
 import { Button } from 'src/app/shared/widget/button';
-import { FormService } from 'src/app/shared/service/form.service';
 import { AuthService } from 'src/app/core/service/auth.service';
-import { switchMap } from 'rxjs/operators';
 import { Team } from 'src/app/data/schema/form-data';
-import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { sitemap } from 'src/app/layout/sitemap';
+import { RequestError } from 'src/app/data/schema/request-result';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [FormService],
 })
 export class HomeComponent implements OnInit {
 
@@ -40,28 +37,19 @@ export class HomeComponent implements OnInit {
 
   button: Button = Button.primary().setBlock().setName('保存');
 
+  apiErrors: RequestError;
+
   constructor(
     private authService: AuthService,
-    private formService: FormService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.formService.formSubmitted$.pipe(
-      switchMap(data => {
-        const formData: Team = JSON.parse(data);
+  }
 
-        return of(formData);
-      })
-    )
-    .subscribe({
-      next: data => {
-        this.authService.createTeam(data);
-        this.router.navigate([`/${sitemap.products}`]);
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
+  onSubmitted(data: string) {
+    const formData: Team = JSON.parse(data);
+    this.authService.createTeam(formData);
+    this.router.navigate([`/${sitemap.products}`]);
   }
 }

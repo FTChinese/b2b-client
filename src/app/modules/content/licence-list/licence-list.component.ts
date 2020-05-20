@@ -13,6 +13,7 @@ export class LicenceListComponent implements OnInit {
 
   readonly licences = licences;
   products: Product[];
+  grant: Licence;
 
   constructor(
     readonly cartService: CartService
@@ -31,5 +32,13 @@ export class LicenceListComponent implements OnInit {
     return this.cartService
       .getCart(l.plan)
       .hasRenewal(l);
+  }
+
+  showGrantDialog(l: Licence) {
+    this.grant = l;
+  }
+
+  closeDialog() {
+    this.grant = null;
   }
 }

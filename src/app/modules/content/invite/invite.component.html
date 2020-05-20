@@ -1,1 +1,33 @@
-<p>invite works!</p>
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">邀请成员使用订阅许可</h5>
+        <button type="button" class="close">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <dl>
+          <dt>ID</dt>
+          <dd>{{licence.id}}</dd>
+
+          <dt>订阅方案</dt>
+          <dd>{{licence.plan.tier | edition}}</dd>
+
+          <dt>截止日期</dt>
+          <dd>{{licence.expireDate}}</dd>
+        </dl>
+      </div>
+
+      <div class="modal-footer">
+        <app-dynamic-form
+        [controls]="dynamicControls"
+        [button]="button"
+        (submitted)="onSubmitted($event)"
+        [errors]="apiErrors"></app-dynamic-form>
+      </div>
+    </div>
+  </div>
+</div>
