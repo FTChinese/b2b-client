@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { DynamicControl } from '../widget/control';
 import { FormGroup } from '@angular/forms';
 import { ControlService } from '../service/control.service';
-// import { FormService } from '../service/form.service';
 import { Button } from '../widget/button';
 import { RequestError } from 'src/app/data/schema/request-result';
+import { FormService } from '../service/form.service';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -17,16 +17,12 @@ export class DynamicFormComponent implements OnInit {
   // Host should pass in an array of DynamicControl.
   @Input() controls: DynamicControl[] = [];
   @Input() button: Button;
-  @Output() submitted = new EventEmitter<string>();
-  @Input()
-  set errors(err: RequestError) {
-    this.setError(err);
-  }
 
   form: FormGroup;
 
   constructor(
     private controlService: ControlService,
+    private formService: FormService,
   ) { }
 
   ngOnInit(): void {
@@ -36,16 +32,15 @@ export class DynamicFormComponent implements OnInit {
     // Host could publish validation errors received from API.
     // Server-side validation aborts early on first error, so
     // there is only one field if it exists.
-    // this.formService.errorReceived$.subscribe(err => {
-    //   this.setError(err);
-    // });
+    this.formService.errorReceived$.subscribe(err => {
+      this.setError(err);
+    });
   }
 
   // Submit form data to host.
   onSubmit() {
     const data = JSON.stringify(this.form.getRawValue());
-    // this.formService.submit(data);
-    this.submitted.emit(data);
+    this.formService.submit(data);
     // Disable the form upon submission.
     this.form.disable();
   }
