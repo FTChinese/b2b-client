@@ -1,0 +1,8 @@
+<div class="w-lg-50">
+  <h2>设置您所属的机构</h2>
+  <p>填写机构名称后才能使用所有功能。以后可以在设置中修改。</p>
+  <app-team-form
+    [errors]="apiErrors"
+    [button]="button"
+    (saved)="onTeamCreated($event)"></app-team-form>
+</div>
