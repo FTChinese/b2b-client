@@ -8,6 +8,7 @@ import { PwResetForm, ResettingPassword } from 'src/app/data/schema/form-data';
 import { sitemap } from 'src/app/layout/sitemap';
 import { Button } from 'src/app/shared/widget/button';
 import { RequestError } from 'src/app/data/schema/request-result';
+import { FormService } from 'src/app/shared/service/form.service';
 
 enum TokenState {
   NotFound = 'not_found',
@@ -27,6 +28,7 @@ enum TokenState {
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss'],
+  providers: [FormService]
 })
 export class ResetPasswordComponent implements OnInit {
 
@@ -60,7 +62,8 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-  ) { }
+    private formService: FormService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -79,17 +82,31 @@ export class ResetPasswordComponent implements OnInit {
       },
       error: err => console.log(err),
     });
+
+    this.formService.formSubmitted$.pipe(
+      switchMap(data => {
+        const formData: PwResetForm = JSON.parse(data);
+        const rp: ResettingPassword = {
+          token: this.token,
+          password: formData.password
+        };
+        console.log(rp);
+        return of(true);
+      })
+    )
+    .subscribe({
+      next: ok => {
+        this.tokenState = TokenState.Used;
+      },
+      error: err => {
+        this.formService.sendError(RequestError.fromResponse(err));
+      }
+    });
   }
 
   onSubmitted(data: string) {
-    const formData: PwResetForm = JSON.parse(data);
-    const rp: ResettingPassword = {
-      token: this.token,
-      password: formData.password
-    };
 
-    console.log(rp);
 
-    this.tokenState = TokenState.Used;
+
   }
 }

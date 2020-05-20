@@ -7,15 +7,17 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Credentials } from 'src/app/data/schema/form-data';
 import { sitemap } from 'src/app/layout/sitemap';
 import { RequestError } from 'src/app/data/schema/request-result';
+import { FormService } from 'src/app/shared/service/form.service';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  providers: [FormService],
 })
 export class LoginComponent implements OnInit {
-
-  apiErrors: RequestError;
 
   dynamicControls: DynamicControl[] = [
     new InputControl({
@@ -41,20 +43,30 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private formService: FormService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.formService.formSubmitted$.pipe(
+      switchMap(data => {
+        const credentials: Credentials = JSON.parse(data);
+        this.authService.login(credentials);
+        return of(credentials);
+      })
+    )
+    .subscribe({
+      next: data => {
+        console.log(data);
+        this.login();
+      },
+      error: err => {
+        this.formService.sendError(RequestError.fromResponse(err));
+      }
+    });
   }
 
-  onSubmitted(data: string) {
-    const credentials: Credentials = JSON.parse(data);
-    this.login(credentials);
-  }
-
-  private login(c: Credentials) {
-    this.authService.login(c);
-
+  private login() {
     if (this.authService.isLoggedIn) {
       const redirect = this.authService.redirectUrl ? this.router.parseUrl(this.authService.redirectUrl) : '/';
 
