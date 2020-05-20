@@ -12,6 +12,7 @@ function isExpired(pp: Passport): boolean {
 })
 export class AuthService {
   passport: Passport | null = null;
+  team: Team | null = null;
 
   redirectUrl: string;
   private storeKey = 'ftc_b2b';
@@ -106,6 +107,11 @@ export class AuthService {
   }
 
   createTeam(team: Team) {
+    this.team = team;
     this.passport.teamId = randomString();
+  }
+
+  updateTeam(team: Team) {
+    this.team = team;
   }
 }
