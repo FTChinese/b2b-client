@@ -4,15 +4,17 @@ import { Button } from 'src/app/shared/widget/button';
 import { Validators } from '@angular/forms';
 import { RequestError } from 'src/app/data/schema/request-result';
 import { Team, PwChangeForm } from 'src/app/data/schema/form-data';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { FormService } from 'src/app/shared/service/form.service';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
+  providers: [FormService]
 })
 export class SettingsComponent implements OnInit {
 
-  teamControls: DynamicControl[];
   passwordControls: DynamicControl[] = [
     new InputControl({
       value: '',
@@ -40,37 +42,23 @@ export class SettingsComponent implements OnInit {
   button: Button = Button.primary().setName('保存');
 
   teamErrors: RequestError;
-  pwErrors: RequestError;
+  team: Team;
 
   constructor(
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.teamControls = [
-      new InputControl({
-        value: '',
-        key: 'name',
-        validators: [Validators.required, Validators.maxLength(64)],
-        label: '名称',
-        placeholder: '',
-        type: 'text',
-        desc: '必填。出现在您给机构成员发送的邀请函中，不必与发票抬头相同'
-      }),
-      new InputControl({
-        value: null,
-        key: 'invoiceTitle',
-        validators: [Validators.maxLength(128)],
-        label: '发票抬头',
-        type: 'text',
-        desc: '选填。仅出现在发票凭证上，可稍候在设置中修改'
-      }),
-    ];
+    this.team = this.authService.team;
+    console.log(this.team);
   }
 
-  onChangeTeam(data: string) {
+  onTeamChanged(data: string) {
     const team: Team = JSON.parse(data);
 
     console.log(team);
+
+    this.authService.updateTeam(team);
   }
 
   onChangePassword(data: string) {

@@ -15,6 +15,8 @@ import { InviteComponent } from './invite/invite.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CustomerServiceComponent } from './customer-service/customer-service.component';
 import { LayoutComponent } from './layout/layout.component';
+import { TeamFormComponent } from './team-form/team-form.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { LayoutComponent } from './layout/layout.component';
     InviteComponent,
     CheckoutComponent,
     CustomerServiceComponent,
-    LayoutComponent
+    LayoutComponent,
+    TeamFormComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
