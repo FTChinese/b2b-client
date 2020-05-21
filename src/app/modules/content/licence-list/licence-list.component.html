@@ -34,11 +34,13 @@
             </td>
             <td *ngSwitchCase="'invited'">
               <span>已邀请 {{lic.lastInviteeEmail}}</span>
-              <button type="button">撤回邀请</button>
+              <button type="button"
+                (click)="revokeInvitation(lic)">撤回邀请</button>
             </td>
             <td *ngSwitchCase="'granted'">
               <span>已授权 {{lic.assignee.email}}</span>
-              <button type="button">撤销授权</button>
+              <button type="button"
+                (click)="revokeLicence(lic)">撤销授权</button>
             </td>
           </ng-container>
 
@@ -81,4 +83,11 @@
   </div>
 </div>
 
-<app-invite *ngIf="grant" [licence]="grant"></app-invite>
+<app-invite *ngIf="invitedLic"
+  [licence]="invitedLic"></app-invite>
+
+<app-revoke-invitation *ngIf="revokingLicInv"
+  [licence]="revokingLicInv"></app-revoke-invitation>
+
+<app-revoke-licence *ngIf="revokedLic"
+  [licence]="revokedLic"></app-revoke-licence>

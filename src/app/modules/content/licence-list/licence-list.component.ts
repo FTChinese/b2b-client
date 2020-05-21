@@ -3,6 +3,7 @@ import { licences } from 'src/app/data/mock';
 import { CartService } from 'src/app/data/service/cart.service';
 import { Licence } from 'src/app/data/schema/licence';
 import { Product } from 'src/app/data/schema/product';
+import { ModalService } from 'src/app/shared/service/modal.service';
 
 @Component({
   selector: 'app-licence-list',
@@ -13,15 +14,21 @@ export class LicenceListComponent implements OnInit {
 
   readonly licences = licences;
   products: Product[];
-  grant: Licence;
+  invitedLic: Licence;
+  revokingLicInv: Licence;
+  revokedLic: Licence;
 
   constructor(
-    readonly cartService: CartService
+    readonly cartService: CartService,
+    private modalService: ModalService,
   ) {
     this.products = this.cartService.getProducts();
   }
 
   ngOnInit(): void {
+    this.modalService.closed$.subscribe(close => {
+      this.closeDialog();
+    });
   }
 
   renew(l: Licence) {
@@ -35,10 +42,23 @@ export class LicenceListComponent implements OnInit {
   }
 
   showGrantDialog(l: Licence) {
-    this.grant = l;
+    this.invitedLic = l;
+    this.modalService.open();
   }
 
-  closeDialog() {
-    this.grant = null;
+  revokeInvitation(l: Licence) {
+    this.revokingLicInv = l;
+    this.modalService.open();
+  }
+
+  revokeLicence(l: Licence) {
+    this.revokedLic = l;
+    this.modalService.open();
+  }
+
+  private closeDialog() {
+    this.invitedLic = null;
+    this.revokingLicInv = null;
+    this.revokedLic = null;
   }
 }

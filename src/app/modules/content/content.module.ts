@@ -17,6 +17,8 @@ import { CustomerServiceComponent } from './customer-service/customer-service.co
 import { LayoutComponent } from './layout/layout.component';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { HomeComponent } from './home/home.component';
+import { RevokeInvitationComponent } from './revoke-invitation/revoke-invitation.component';
+import { RevokeLicenceComponent } from './revoke-licence/revoke-licence.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { HomeComponent } from './home/home.component';
     CustomerServiceComponent,
     LayoutComponent,
     TeamFormComponent,
-    HomeComponent
+    HomeComponent,
+    RevokeInvitationComponent,
+    RevokeLicenceComponent
   ],
   imports: [
     CommonModule,

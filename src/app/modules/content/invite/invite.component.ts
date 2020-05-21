@@ -1,21 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Licence } from 'src/app/data/schema/licence';
 import { Validators } from '@angular/forms';
 import { InputControl, DynamicControl } from 'src/app/shared/widget/control';
 import { Button } from 'src/app/shared/widget/button';
 import { Invite } from 'src/app/data/schema/form-data';
 import { RequestError } from 'src/app/data/schema/request-result';
+import { FormService } from 'src/app/shared/service/form.service';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { ModalService } from 'src/app/shared/service/modal.service';
 
 @Component({
   selector: 'app-invite',
   templateUrl: './invite.component.html',
-  styleUrls: ['./invite.component.scss']
+  styleUrls: ['./invite.component.scss'],
+  providers: [FormService],
 })
 export class InviteComponent implements OnInit {
 
   @Input() licence: Licence;
-
-  apiErrors: RequestError;
 
   dynamicControls: DynamicControl[] = [
     new InputControl({
@@ -39,14 +42,33 @@ export class InviteComponent implements OnInit {
 
   button: Button = Button.primary().setName('发送');
 
-  constructor() { }
+  constructor(
+    private formService: FormService,
+    private modalService: ModalService,
+  ) { }
 
   ngOnInit(): void {
+    this.formService.formSubmitted$.pipe(
+      switchMap(data => {
+        const invite: Omit<Invite, 'licenceId'> = JSON.parse(data);
+
+        console.log(invite);
+
+        return of(true);
+      })
+    )
+    .subscribe({
+      next: ok => {
+        console.log(ok);
+      },
+      error: err => {
+        console.log(err);
+        this.formService.sendError(RequestError.fromResponse(err));
+      }
+    });
   }
 
-  onSubmitted(data: string) {
-    const invite: Omit<Invite, 'licenceId'> = JSON.parse(data);
-
-    console.log(invite);
+  close() {
+    this.modalService.close();
   }
 }

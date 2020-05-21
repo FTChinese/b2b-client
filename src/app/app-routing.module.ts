@@ -4,11 +4,11 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
-import { HomeComponent } from './modules/home/home/home.component';
 import { JumboLayoutComponent } from './layout/jumbo-layout/jumbo-layout.component';
 import { TeamGuard } from './core/guard/team.guard';
 import { AuthModule } from './modules/auth/auth.module';
 import { ContentModule } from './modules/content/content.module';
+import { HomeComponent } from './modules/content/home/home.component';
 
 const routes: Routes = [
   {
