@@ -9,6 +9,7 @@ import { FormService } from 'src/app/shared/service/form.service';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ModalService } from 'src/app/shared/service/modal.service';
+import { invitationID } from 'src/app/data/mock';
 
 @Component({
   selector: 'app-invite',
@@ -19,6 +20,7 @@ import { ModalService } from 'src/app/shared/service/modal.service';
 export class InviteComponent implements OnInit {
 
   @Input() licence: Licence;
+  @Output() invited = new EventEmitter<Licence>();
 
   dynamicControls: DynamicControl[] = [
     new InputControl({
@@ -60,6 +62,10 @@ export class InviteComponent implements OnInit {
     .subscribe({
       next: ok => {
         console.log(ok);
+        this.licence.lastInvitationId = invitationID();
+        this.licence.lastInviteeEmail = 'inviated@example.org';
+
+        this.invited.emit(this.licence);
       },
       error: err => {
         console.log(err);
