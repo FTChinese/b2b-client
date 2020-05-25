@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Licence } from 'src/app/data/schema/licence';
 import { ModalService } from 'src/app/shared/service/modal.service';
 
@@ -10,6 +10,7 @@ import { ModalService } from 'src/app/shared/service/modal.service';
 export class RevokeInvitationComponent implements OnInit {
 
   @Input() licence: Licence;
+  @Output() reovked = new EventEmitter<Licence>();
 
   constructor(
     private modalService: ModalService,
@@ -20,5 +21,13 @@ export class RevokeInvitationComponent implements OnInit {
 
   close() {
     this.modalService.close();
+  }
+
+  revoke() {
+    this.licence.status = 'available';
+    this.licence.lastInvitationId = null;
+    this.licence.lastInviteeEmail = null;
+
+    this.reovked.emit(this.licence);
   }
 }

@@ -84,10 +84,13 @@
 </div>
 
 <app-invite *ngIf="invitedLic"
-  [licence]="invitedLic"></app-invite>
+  [licence]="invitedLic"
+  (invited)="onInviting($event)"></app-invite>
 
 <app-revoke-invitation *ngIf="revokingLicInv"
-  [licence]="revokingLicInv"></app-revoke-invitation>
+  [licence]="revokingLicInv"
+  (reovked)="onRevokeInvitation($event)"></app-revoke-invitation>
 
 <app-revoke-licence *ngIf="revokedLic"
-  [licence]="revokedLic"></app-revoke-licence>
+  [licence]="revokedLic"
+  (revoked)="onRevokedLicence($event)"></app-revoke-licence>

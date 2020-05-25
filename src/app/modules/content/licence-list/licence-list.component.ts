@@ -56,6 +56,21 @@ export class LicenceListComponent implements OnInit {
     this.modalService.open();
   }
 
+  onRevokedLicence(l: Licence) {
+    console.log('Revoked licence: %o', l);
+    this.closeDialog();
+  }
+
+  onRevokeInvitation(l: Licence) {
+    console.log('Revoked invitation: %o', l);
+    this.closeDialog();
+  }
+
+  onInviting(l: Licence) {
+    console.log('Invited: %o', l);
+    this.closeDialog();
+  }
+
   private closeDialog() {
     this.invitedLic = null;
     this.revokingLicInv = null;

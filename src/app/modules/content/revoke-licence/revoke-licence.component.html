@@ -3,7 +3,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">撤销已已授予的许可</h5>
-        <button type="button" class="close" (click)="close()">
+        <button
+          type="button"
+          class="close"
+          (click)="close()">
           <span>&times;</span>
         </button>
       </div>
@@ -16,6 +19,7 @@
         <button
           type="button"
           class="btn btn-primary"
+          (click)="revoke()"
           >是的，我要撤销</button>
       </div>
     </div>
