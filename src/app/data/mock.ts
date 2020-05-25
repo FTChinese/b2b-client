@@ -166,7 +166,7 @@ export const licences: Licence[] = [
   }
 ];
 
-function invitationID(): string {
+export function invitationID(): string {
   return `inv_${randomString()}`;
 }
 
