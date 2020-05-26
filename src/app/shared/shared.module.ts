@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditionPipe } from './pipes/edition.pipe';
 import { CyclePipe } from './pipes/cycle.pipe';
 import { ButtonDirective } from './directive/button.directive';
+import { InvitationStatusPipe } from './pipes/invitation-status.pipe';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ButtonDirective } from './directive/button.directive';
     EditionPipe,
     CyclePipe,
     ButtonDirective,
+    InvitationStatusPipe,
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { ButtonDirective } from './directive/button.directive';
     DynamicFormComponent,
     EditionPipe,
     CyclePipe,
+    InvitationStatusPipe,
   ]
 })
 export class SharedModule { }
