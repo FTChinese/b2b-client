@@ -7,7 +7,6 @@
       <th>创建时间</th>
       <th>有效时间</th>
       <th>状态</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -16,11 +15,7 @@
       <td>{{inv.description}}</td>
       <td>{{inv.createdUtc}}</td>
       <td>{{inv.expirationDays}}</td>
-      <td>
-        <span>{{inv.status}}</span>
-        <button *ngIf="inv.status === 'created'" type="button">撤回</button>
-      </td>
-      <td><a [routerLink]="[licencesLink, inv.licenceId]">查看许可</a></td>
+      <td>{{inv.status | invitationStatus}}</td>
     </tr>
   </tbody>
 </table>
