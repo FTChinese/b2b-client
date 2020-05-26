@@ -58,17 +58,25 @@ export class LicenceListComponent implements OnInit {
 
   onRevokedLicence(l: Licence) {
     console.log('Revoked licence: %o', l);
-    this.closeDialog();
+    this.updateLicence(l);
   }
 
   onRevokeInvitation(l: Licence) {
     console.log('Revoked invitation: %o', l);
-    this.closeDialog();
+    this.updateLicence(l);
   }
 
   onInviting(l: Licence) {
     console.log('Invited: %o', l);
-    this.closeDialog();
+    this.updateLicence(l);
+  }
+
+  private updateLicence(l: Licence) {
+    this.licences.forEach((lic, i) => {
+      if (lic.id === l.id) {
+        this.licences[i] = l;
+      }
+    });
   }
 
   private closeDialog() {
