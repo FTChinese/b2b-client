@@ -35,5 +35,6 @@ export class RevokeLicenceComponent implements OnInit {
     };
 
     this.revoked.emit(this.licence);
+    this.modalService.close();
   }
 }
