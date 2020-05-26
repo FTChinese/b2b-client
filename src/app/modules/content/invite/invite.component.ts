@@ -62,10 +62,13 @@ export class InviteComponent implements OnInit {
     .subscribe({
       next: ok => {
         console.log(ok);
+
+        this.licence.status = 'invited';
         this.licence.lastInvitationId = invitationID();
         this.licence.lastInviteeEmail = 'inviated@example.org';
 
         this.invited.emit(this.licence);
+        this.modalService.close();
       },
       error: err => {
         console.log(err);
