@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">撤销已已授予的许可</h5>
+        <h5 class="modal-title">撤销许可：{{licence.plan.tier | edition}} / {{licence.expireDate}}</h5>
         <button
           type="button"
           class="close"
@@ -12,7 +12,7 @@
       </div>
 
       <div class="modal-body">
-        您确定要撤销授予xxx的许可吗？这将清除该用户的会员信息。撤销后，您可以继续把该许可授权给其他人使用。
+        <p>您确定要撤销已经授予 <strong>{{licence.assignee.email}}</strong> 的许可吗？这将清除该用户的会员信息。撤销后，您可以继续把该许可授权给其他人使用。</p>
       </div>
 
       <div class="modal-footer">
