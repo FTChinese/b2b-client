@@ -6,7 +6,7 @@ import { tiers } from 'src/app/data/schema/localization';
   name: 'edition'
 })
 export class EditionPipe implements PipeTransform {
-  transform(value: Tier): unknown {
+  transform(value: Tier): string {
     return tiers[value];
   }
 }

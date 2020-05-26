@@ -7,7 +7,7 @@ import { cycles } from 'src/app/data/schema/localization';
 })
 export class CyclePipe implements PipeTransform {
 
-  transform(value: Cycle): unknown {
+  transform(value: Cycle): string {
     return cycles[value];
   }
 
