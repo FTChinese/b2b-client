@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "copy": "cp -R dist/b2b-client ../ft-interact"
+    "deploy": "cp dist/b2b-client/*.js ../../svn-online/ftac/frontend/b2b/"
   },
   "private": true,
   "dependencies": {
