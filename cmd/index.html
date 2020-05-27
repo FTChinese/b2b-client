@@ -21,7 +21,7 @@
 <body>
     <app-root></app-root>
     {% for script in scripts %}
-    <script src="{{script.src}}" {%if script.isModule%}type="module"{% else %}nomodule defer{% endif %}></script>
+    <script src="/static/b2b/{{script.src}}" {%if script.isModule%}type="module"{% else %}nomodule defer{% endif %}></script>
     {% endfor %}
 </body>
 </html>
