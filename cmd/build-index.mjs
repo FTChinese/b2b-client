@@ -106,15 +106,6 @@ async function build() {
   console.log('inlining css...')
   const inlineResult = await inlineSource(renderd)
 
-  const outFile = resolve(__dirname, '../dist', 'index.html');
-
-  console.log(`Writing file ${outFile}`);
-
-  await fs.writeFile(
-    outFile,
-    inlineResult
-  );
-
   const goTemplate = await render({
     name: 'index.go',
     ctx: {
@@ -122,8 +113,11 @@ async function build() {
     }
   });
 
+  const outFile = resolve(__dirname, '../dist/index.html.go');
+  console.log(`Writing file ${outFile}`);
+
   await fs.writeFile(
-    resolve(__dirname, "../dist/index.html.go"),
+    outFile,
     goTemplate,
   );
 }
