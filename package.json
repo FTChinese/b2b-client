@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "cp dist/b2b-client/*.js ../../svn-online/ftac/frontend/b2b/"
+    "deploy": "cp dist/b2b-client/*.js ../../svn-online/ftac/frontend/b2b/",
+    "build-index": "node cmd/build-index.mjs"
   },
   "private": true,
   "dependencies": {
