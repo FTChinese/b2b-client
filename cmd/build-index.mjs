@@ -13,6 +13,10 @@ const __dirname = dirname(__filename);
 const require = createRequire(import.meta.url);
 const pkg = require('../package.json');
 
+nunjucks.configure({
+  autoescape: false,
+});
+
 /**
  * @typedef {Object} ScriptAttr
  * @property {string} src
@@ -109,6 +113,18 @@ async function build() {
   await fs.writeFile(
     outFile,
     inlineResult
+  );
+
+  const goTemplate = await render({
+    name: 'index.go',
+    ctx: {
+      content: inlineResult
+    }
+  });
+
+  await fs.writeFile(
+    resolve(__dirname, "../dist/index.html.go"),
+    goTemplate,
   );
 }
 
