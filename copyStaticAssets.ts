@@ -15,4 +15,8 @@ if (config.production) {
   shell.cp(`dist/${currentProjectName}/*.map`, config.jsCssCopyTarget);
 }
 
+console.log(`Copied frontend assets to ${config.jsCssCopyTarget}`);
+
 shell.cp(config.goOutFile, config.htmlCopyTarget);
+
+console.log(`Copied go templates to ${config.htmlCopyTarget}`);
