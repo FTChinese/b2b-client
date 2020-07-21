@@ -9,8 +9,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "cp dist/b2b-client/*.js ../../svn-online/ftac/frontend/b2b/",
-    "build-index": "node cmd/build-index.mjs"
+    "build-go": "ts-node ./bin/build-go.ts",
+    "copy-static": "ts-node copyStaticAssets.ts",
+    "deploy-dev": "ng build && npm run build-go && npm run copy-static",
+    "deploy": "ng build --prod && NODE_ENV=production npm run build-go && NODE_ENV=production npm run copy-static"
   },
   "private": true,
   "dependencies": {
