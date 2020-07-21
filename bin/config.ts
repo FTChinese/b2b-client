@@ -46,8 +46,8 @@ const config = {
   production: cli.isProd,
   staticPrefix,
   goTemplate: 'views.go.njk', // The nunjucks template used to generated go template file
-  goOutFile: resolve(process.cwd(), 'dist/templates.go'), // The generated go file containing inlined templates.
-  htmlCopyTarget: `../${serverProjectName}/web/views`, // The directory used to place generated go tempalate file.
+  goOutFile: resolve(process.cwd(), 'dist/home.html'), // The generated go template file.
+  htmlCopyTarget: `../${serverProjectName}/web/template/b2b`, // The directory used to place generated go tempalate file.
   jsCssCopyTarget, // The directory used to put js and css file.
 };
 

@@ -53,20 +53,9 @@ async function build(assets: Assets): Promise<void> {
     scripts,
   };
 
-  const rendered = await render('index.html', ctxIndex);
+  const homeHMTL = await render('index.html', ctxIndex);
 
-  const ctxGo: CtxGo = {
-    data: [
-      {
-        name: 'home',
-        content: rendered,
-      }
-    ]
-  };
-
-  const goTmpl = await render(config.goTemplate, ctxGo);
-
-  await writeFile(config.goOutFile, goTmpl, { encoding: 'utf8' });
+  await writeFile(config.goOutFile, homeHMTL, { encoding: 'utf8' });
 }
 
 parse(inputFile)
