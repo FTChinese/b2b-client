@@ -34,7 +34,7 @@ const serverProjectName = 'ftacademy';
 const clientProjectName = 'b2b';
 
 // The URL prefix used for link and script tag.
-const staticPrefix = `/static/${clientProjectName}/`;
+const staticPrefix = `/static/frontend/${clientProjectName}/`;
 
 // Copy js and css to build directory of the server project for development,
 // or to dedicated static server directory.
