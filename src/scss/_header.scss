@@ -13,14 +13,20 @@ app-toolbar {
     color: $color-black80;
 
     &:hover {
-        color: $color-black70;
+      color: $color-black70;
     }
   }
 
   .ftc-brand {
     a:hover {
-     text-decoration: none;
+      text-decoration: none;
     }
+  }
+
+  .line {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 16px;
   }
 
   .cart-button {
@@ -33,12 +39,14 @@ app-toolbar {
     cursor: pointer;
     background-color: white;
     position: relative;
+
     .badge {
       position: absolute;
       right: 0;
       top: 50%;
       transform: translate(50%, -50%);
     }
+
     &:hover {
       opacity: 0.8;
       text-decoration: none;

@@ -1,4 +1,15 @@
+.nav.sidebar .nav-link {
+  display: block;
+  padding: .5rem 2rem;
+  border-left: 4px solid transparent;
+}
+
+.nav.sidebar a:hover {
+  color: $color-claret;
+
+}
+
 .nav.sidebar a.active {
-    color: $color-claret;
-    border-right: 2px solid $color-claret;
+  color: $color-claret;
+  border-left: 4px solid $color-claret;
 }
