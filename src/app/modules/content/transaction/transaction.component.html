@@ -1,4 +1,4 @@
-<div class="mb-3 pb-3 border-bottom" *ngFor="let checkout of checkouts">
+<div class="pb-3 order" *ngFor="let checkout of checkouts">
   <p>创建时间：{{checkout.createdUtc}}</p>
   <p>总计金额：{{checkout.totalAmount}}</p>
   <p *ngIf="checkout.confirmedUtc">交易完成：{{checkout.confirmedUtc}}</p>
@@ -6,7 +6,7 @@
   <div *ngFor="let item of checkout.items">
     <p>{{item.plan.tier | edition}} 新增订阅{{item.create}}份，续订{{item.renewal.length}}份</p>
   </div>
-  <div>
-    <button>查看本次交易所有订单</button>
+  <div class="order-btn">
+    <button class="btn btn-primary">查看本次交易所有订单</button>
   </div>
 </div>

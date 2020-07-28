@@ -7,13 +7,16 @@ body {
     sans-serif;
   background-color: $color-paper;
 }
+
 .page-content {
   min-height: 80vh;
 }
+
 table caption {
   caption-side: top;
   text-align: center;
 }
+
 a {
   color: $color-teal;
 }
@@ -39,6 +42,7 @@ a {
 @import "barrier";
 @import "aspect";
 @import "footer";
+@import "table";
 
 .modal {
   display: block;

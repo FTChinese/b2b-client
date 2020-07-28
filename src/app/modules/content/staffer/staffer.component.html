@@ -1,12 +1,11 @@
-<div class="w-lg-50">
-  <h2>成员管理</h2>
-  <table class="table">
+<div class="w-lg-50 staffer">
+  <h2 class="mb-3">成员管理</h2>
+  <table class="table licence-table">
     <tbody>
       <tr *ngFor="let staffer of staff">
-        <td>{{staffer.email}}</td>
-        <td><button type="button">删除</button></td>
+        <td class="leftTd">{{staffer.email}}</td>
+        <td class="rightTd"><button type="button" class="btn btn-primary">删除</button></td>
       </tr>
     </tbody>
   </table>
 </div>
-

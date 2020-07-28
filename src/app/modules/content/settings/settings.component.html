@@ -1,12 +1,8 @@
-<div class="w-xl-50">
-  <div class="border-bottom mb-3 pb-3">
-    <h2>更新机构信息</h2>
+<div class="w-xl-50 setting">
+  <div class="pb-3">
+    <h2 class="mb-3">更新机构信息</h2>
 
-    <app-team-form
-      *ngIf="team; else loading"
-      [team]="team"
-      [errors]="teamErrors"
-      [button]="button"
+    <app-team-form *ngIf="team; else loading" [team]="team" [errors]="teamErrors" [button]="button"
       (saved)="onTeamChanged($event)"></app-team-form>
 
     <ng-template #loading>
@@ -14,11 +10,9 @@
     </ng-template>
   </div>
 
-  <div class="border-bottom mb-3">
-    <h2>修改密码</h2>
-    <app-dynamic-form
-      [controls]="passwordControls"
-      [button]="button"></app-dynamic-form>
+  <div class="border-bottom">
+    <h2 class="mb-3">修改密码</h2>
+    <app-dynamic-form [controls]="passwordControls" [button]="button"></app-dynamic-form>
 
   </div>
 </div>

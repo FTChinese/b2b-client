@@ -1,0 +1,97 @@
+.row {
+  margin-top: 10px;
+}
+
+// h2
+.mb-3 {
+  font-size: 1.5em;
+}
+
+// table
+.licence-table {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  background-color: #fff;
+
+  tbody {
+    display: block;
+    height: 350px;
+    overflow-y: scroll;
+  }
+
+  thead,
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+  }
+
+  tr td {
+    vertical-align: middle !important;
+    word-wrap: break-word;
+  }
+
+  .renew {
+    vertical-align: initial !important;
+  }
+}
+
+.staffer {
+  width: 70%;
+  margin-left: 0 !important;
+
+  .leftTd {
+    text-align: left;
+    padding-left: 30px;
+  }
+
+  .rightTd {
+    text-align: right;
+    padding-right: 30px;
+  }
+}
+
+.setting {
+  margin: initial;
+
+  button {
+    display: block;
+    width: 100%;
+  }
+}
+
+.btn {
+  margin: 0 auto;
+  opacity: initial;
+}
+
+.btn-primary:disabled {
+  opacity: initial;
+}
+
+
+.member {
+  margin-top: 35px !important;
+}
+
+.card-body {
+  padding: 1rem !important;
+}
+
+
+
+
+.order {
+  margin-bottom: 20px;
+  display: block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  background-color: #fff;
+  width: 40%;
+  text-align: left;
+  padding: 1.5rem 2rem;
+
+
+  .order-btn {
+    text-align: center;
+  }
+}
