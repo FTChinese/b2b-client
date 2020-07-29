@@ -14,7 +14,7 @@
 
   tbody {
     display: block;
-    height: 350px;
+    height: 450px;
     overflow-y: scroll;
   }
 
@@ -36,6 +36,7 @@
   }
 }
 
+// 成员管理
 .staffer {
   width: 70%;
   margin-left: 0 !important;
@@ -63,35 +64,167 @@
 .btn {
   margin: 0 auto;
   opacity: initial;
+
+  &.btn-primary:disabled {
+    opacity: initial;
+  }
 }
 
-.btn-primary:disabled {
-  opacity: initial;
+
+// 订单管理
+.order-item {
+  display: flex;
+  flex-wrap: wrap;
+
+  .order {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px #0000001f, 0 0 6px rgba(0, 0, 0, .04);
+    background-color: #fff;
+    width: 45%;
+    text-align: left;
+    padding: 2rem !important;
+    margin-left: 2rem;
+
+
+    .order-btn {
+      text-align: center;
+    }
+  }
 }
 
-
-.member {
-  margin-top: 35px !important;
+//登录页面
+.mt-5 {
+  margin-top: 1rem !important;
 }
 
+// 设置所属机构
+.jumbotron {
+  background-color: initial;
+  padding: 2rem 1rem !important;
+}
+
+// 购买
 .card-body {
-  padding: 1rem !important;
+
+  small {
+    display: block;
+    margin: 0 0 1rem 1rem !important;
+  }
+
+  .program {
+    text-align: left !important;
+    margin-left: 1rem !important;
+  }
 }
 
+// 客服
+.service {
+  margin-top: 1rem;
 
-
-
-.order {
-  margin-bottom: 20px;
-  display: block;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-  background-color: #fff;
-  width: 40%;
-  text-align: left;
-  padding: 1.5rem 2rem;
-
-
-  .order-btn {
+  .phone-number {
+    color: $color-teal;
     text-align: center;
+    margin-bottom: 0 !important;
+  }
+
+  small {
+    display: block;
+    color: $color-teal;
+    text-align: center !important;
+    margin-bottom: .3rem !important;
+  }
+
+  .customer {
+    padding: .5rem 0;
+    color: $color-teal;
+    margin: 0 auto;
+    font-weight: 400;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, .12), 0 0 8px rgba(0, 0, 0, .04);
+    border-radius: .5rem;
+    background-color: #fff;
+    text-align: center;
+  }
+
+  .icon {
+    text-align: center;
+
+    .icons {
+      display: inline-block;
+      padding: 1rem;
+      margin: 0 auto;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+
+      &.weChat {
+        position: relative;
+      }
+
+      &.weChat .qrCode {
+        position: absolute;
+        right: -28px;
+        top: 60px;
+        z-index: 99;
+        width: 120px;
+        height: 160px;
+
+        border-radius: 4px;
+        transform-origin: top right;
+        transform: scale(0);
+        opacity: 0;
+        -webkit-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+      }
+
+      &.weChat:hover .qrCode {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// 会员管理
+.member {
+  margin-top: 1.8rem !important;
+}
+
+//购物车
+.cart {
+  width: 100%;
+  margin-left: 0 !important;
+
+  .card {
+    box-shadow: 0 4px 6px #0000001f, 0 0 6px rgba(0, 0, 0, .04);
+    background-color: #fff;
+  }
+
+  .d-flex {
+    align-items: center;
+    font-size: 1.25rem !important;
+
+    .btn {
+      margin: initial;
+    }
+  }
+
+
+}
+
+// 弹窗
+.modal-footer {
+  border-top: initial;
+}
+
+.modal-body {
+  dt {
+    float: left;
+  }
+
+  dd {
+    margin-left: 5rem;
   }
 }

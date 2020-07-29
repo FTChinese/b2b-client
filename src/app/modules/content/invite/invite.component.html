@@ -4,28 +4,23 @@
 
       <div class="modal-header">
         <h5 class="modal-title">邀请成员使用订阅许可</h5>
-        <button
-          type="button"
-          class="close"
-          (click)="close()">
+        <button type="button" class="close" (click)="close()">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <dl class="border-bottom">
-          <dt>ID</dt>
+        <dl>
+          <dt>ID:</dt>
           <dd>{{licence.id}}</dd>
 
-          <dt>订阅方案</dt>
+          <dt>订阅方案:</dt>
           <dd>{{licence.plan.tier | edition}}</dd>
 
-          <dt>截止日期</dt>
+          <dt>截止日期:</dt>
           <dd>{{licence.expireDate}}</dd>
         </dl>
 
-        <app-dynamic-form
-        [controls]="dynamicControls"
-        [button]="button"></app-dynamic-form>
+        <app-dynamic-form [controls]="dynamicControls" [button]="button"></app-dynamic-form>
       </div>
 
     </div>

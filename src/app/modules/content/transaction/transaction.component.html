@@ -1,12 +1,14 @@
-<div class="pb-3 order" *ngFor="let checkout of checkouts">
-  <p>创建时间：{{checkout.createdUtc}}</p>
-  <p>总计金额：{{checkout.totalAmount}}</p>
-  <p *ngIf="checkout.confirmedUtc">交易完成：{{checkout.confirmedUtc}}</p>
-  <p *ngIf="!checkout.confirmedUtc">交易尚未完成</p>
-  <div *ngFor="let item of checkout.items">
-    <p>{{item.plan.tier | edition}} 新增订阅{{item.create}}份，续订{{item.renewal.length}}份</p>
-  </div>
-  <div class="order-btn">
-    <button class="btn btn-primary">查看本次交易所有订单</button>
+<div class="order-item">
+  <div class="pb-3 order" *ngFor="let checkout of checkouts">
+    <p>创建时间：{{checkout.createdUtc}}</p>
+    <p>总计金额：{{checkout.totalAmount}}</p>
+    <p *ngIf="checkout.confirmedUtc">交易完成：{{checkout.confirmedUtc}}</p>
+    <p *ngIf="!checkout.confirmedUtc">交易尚未完成</p>
+    <div *ngFor="let item of checkout.items">
+      <p>{{item.plan.tier | edition}} 新增订阅{{item.create}}份，续订{{item.renewal.length}}份</p>
+    </div>
+    <div class="order-btn">
+      <button class="btn btn-primary">查看本次交易所有订单</button>
+    </div>
   </div>
 </div>

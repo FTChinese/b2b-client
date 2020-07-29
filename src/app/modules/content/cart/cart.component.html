@@ -1,4 +1,4 @@
-<div class="w-xl-50">
+<div class="w-xl-50 cart">
   <h2 class="text-center">购物车</h2>
 
   <ng-container *ngIf="cartService.totalItems; else elseBlock">
@@ -11,12 +11,7 @@
 
         <div class="p-3 border-bottom">
           <span class="text-danger">新增订阅</span> x
-          <input
-            #newSubs
-            style="width: 3em;"
-            type="number"
-            [disabled]="disabled"
-            [value]="cart.newSubs"
+          <input #newSubs style="width: 3em;" type="number" [disabled]="disabled" [value]="cart.newSubs"
             (change)="setNewSubs(cart.plan, newSubs.value)" />
         </div>
 
@@ -40,10 +35,7 @@
                 </span>
               </ng-container>
 
-              <button
-                class="btn btn-danger"
-                type="button"
-                (click)="removeRenwal(lic)">删除</button>
+              <button class="btn btn-danger" type="button" (click)="removeRenwal(lic)">删除</button>
             </li>
           </ul>
         </div>
@@ -51,9 +43,11 @@
         <div class="card-footer text-right">
           <div>{{cart.plan.price | currency:'CNY':'symbol-narrow'}}/{{cart.plan.cycle | cycle}}/份</div>
 
-          <div class="text-danger">{{cart.unitPrice | currency:'CNY':'symbol-narrow'}} x {{cart.count}} = {{cart.totalAmount}}</div>
+          <div class="text-danger">{{cart.unitPrice | currency:'CNY':'symbol-narrow'}} x {{cart.count}} =
+            {{cart.totalAmount}}</div>
 
-          <div class="text-muted" *ngIf="cart.discount.priceOff">享满{{cart.discount.threshold}}份每份减{{cart.discount.priceOff}}元</div>
+          <div class="text-muted" *ngIf="cart.discount.priceOff">
+            享满{{cart.discount.threshold}}份每份减{{cart.discount.priceOff}}元</div>
         </div>
       </div><!-- End card -->
 
@@ -63,18 +57,11 @@
 
       <span class="text-center">应付总额 {{this.cartService.totalAmount | currency:'CNY':'symbol-narrow'}}</span>
 
-      <button
-        class="btn btn-primary"
-        type="button"
-        (click)="checkout()"
-        [disabled]="disabled">结算</button>
+      <button class="btn btn-primary" type="button" (click)="checkout()" [disabled]="disabled">结算</button>
     </div>
   </ng-container>
 
   <ng-template #elseBlock>
-    <p class="text-center">购物车空空～ <a [routerLink]="productsLink">去订阅</a> 或 <a [routerLink]="licencesLink">续订</a></p>
+    <p class="text-center">购物车目前空空的哦～ <a [routerLink]="productsLink">去订阅</a> 或 <a [routerLink]="licencesLink">续订</a></p>
   </ng-template>
 </div> <!-- End cart container -->
-
-
-
