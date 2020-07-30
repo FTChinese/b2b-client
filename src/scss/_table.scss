@@ -48,12 +48,18 @@
 }
 
 // class="w-xl-50"
-.setting {
-  margin: initial;
+.w-xl-50 {
+  .prompt {
+    font-size: 20px !important;
+  }
 
-  button {
-    display: block;
-    width: 100%;
+  &.setting {
+    margin: initial;
+
+    button {
+      display: block;
+      width: 100%;
+    }
   }
 }
 
@@ -114,7 +120,7 @@
   text-align: center !important;
 
   .text-center {
-    font-size: 25px !important;
+    font-size: 23px !important;
   }
 
   ul li {
@@ -205,6 +211,7 @@
       }
 
       img {
+        color: $color-teal;
         height: 30px;
       }
 
@@ -273,17 +280,25 @@
 }
 
 // 弹窗
-.modal-footer {
-  border-top: initial;
-}
-
-.modal-body {
-  dt {
-    float: left;
+.modal-content {
+  .modal-header {
+    h5 {
+      font-size: 23px !important;
+    }
   }
 
-  dd {
-    margin-left: 5rem;
+  .modal-body {
+    dt {
+      float: left;
+    }
+
+    dd {
+      margin-left: 5rem;
+    }
+  }
+
+  .modal-footer {
+    border-top: initial;
   }
 }
 
