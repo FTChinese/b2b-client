@@ -55,7 +55,7 @@
 
     <div class="pt-5 d-flex justify-content-between" *ngIf="this.cartService.totalAmount">
 
-      <span class="text-center">应付总额 {{this.cartService.totalAmount | currency:'CNY':'symbol-narrow'}}</span>
+      <span>应付总额 {{this.cartService.totalAmount | currency:'CNY':'symbol-narrow'}}</span>
 
       <button class="btn btn-primary" type="button" (click)="checkout()" [disabled]="disabled">结算</button>
     </div>
