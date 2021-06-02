@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RevokeLicenceComponent } from './revoke-licence.component';
 
@@ -6,7 +6,7 @@ describe('RevokeLicenceComponent', () => {
   let component: RevokeLicenceComponent;
   let fixture: ComponentFixture<RevokeLicenceComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RevokeLicenceComponent ]
     })

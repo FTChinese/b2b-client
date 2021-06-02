@@ -60,7 +60,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(
       routes,
-      {enableTracing: true}
+      { enableTracing: true, relativeLinkResolution: 'legacy' }
     )
   ],
   exports: [RouterModule]
