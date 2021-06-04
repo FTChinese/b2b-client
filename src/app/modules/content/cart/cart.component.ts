@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/data/service/cart.service';
 import { Licence } from 'src/app/data/schema/licence';
-import { Plan } from 'src/app/data/schema/product';
+import { Price } from 'src/app/data/schema/product';
 import { sitemap } from 'src/app/layout/sitemap';
 import { Router } from '@angular/router';
 
@@ -21,22 +21,29 @@ export class CartComponent implements OnInit {
     private router: Router,
     readonly cartService: CartService
   ) {
-    this.cartService.getProducts();
   }
 
   ngOnInit(): void {
   }
 
-  setNewSubs(plan: Plan, copies: string) {
-    this.cartService.setNewSubs(plan, Number.parseInt(copies, 10) ?? -1);
+  setNewSubs(price: Price, copies: string) {
+    this.cartService.setNewCopies(price, Number.parseInt(copies, 10) ?? -1);
   }
 
   removeRenwal(l: Licence) {
     this.cartService.removeRenwal(l);
   }
 
+  incr(price: Price) {
+    this.cartService.incrNewCopy(price);
+  }
+
+  decr(price: Price) {
+    this.cartService.decrNewCopy(price);
+  }
+
   checkout() {
-    console.log(this.cartService.json());
+    console.log(this.cartService);
     this.disabled = true;
     this.router.navigateByUrl(`/${sitemap.cart}/checkout`);
   }

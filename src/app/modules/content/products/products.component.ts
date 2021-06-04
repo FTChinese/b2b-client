@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, Plan } from 'src/app/data/schema/product';
+import { mockProducts } from 'src/app/data/mock';
+import { Product, Price } from 'src/app/data/schema/product';
 import { CartService } from 'src/app/data/service/cart.service';
 
 @Component({
@@ -20,14 +21,14 @@ export class ProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.products = this.cartService.getProducts();
+    this.products = mockProducts;
   }
 
-  addSubs(plan: Plan) {
-    this.cartService.addNewSubs(plan);
+  addSubs(price: Price) {
+    this.cartService.incrNewCopy(price);
   }
 
-  getCount(plan: Plan): number {
-    return this.cartService.getCart(plan)?.newSubs ?? 0;
+  getCount(price: Price): number {
+    return this.cartService.newCopiesOf(price);
   }
 }

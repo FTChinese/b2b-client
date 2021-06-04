@@ -10,21 +10,16 @@
         </div>
 
         <ul>
-          <li *ngFor="let line of product.description">{{ line }}</li>
+          <li *ngFor="let line of product.description.split('\n')">{{ line }}</li>
         </ul>
         <small *ngIf="product.smallPrint">{{product.smallPrint}}</small>
-
-        <h5 class=" program">折扣方案</h5>
-        <ul>
-          <li *ngFor="let item of product.plan.discounts">满{{item.threshold}}份每份减{{item.priceOff}}</li>
-        </ul>
       </div><!-- End of card body -->
 
       <div class="card-footer text-center">
-        <button type="button" class="btn btn-primary badge-container" (click)="addSubs(product.plan)">
+        <button type="button" class="btn btn-primary badge-container" (click)="addSubs(product.prices[0])">
           <span>加入购物车 </span>
-          <span *ngIf="getCount(product.plan)" class="badge badge-success">
-            {{getCount(product.plan)}}
+          <span *ngIf="getCount(product.prices[0])" class="badge badge-success">
+            {{getCount(product.prices[0])}}
           </span>
         </button>
 

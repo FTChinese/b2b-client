@@ -1,28 +1,38 @@
 <div class="w-xl-50 cart">
   <h2 class="text-center">购物车</h2>
 
-  <ng-container *ngIf="cartService.totalItems; else elseBlock">
-    <ng-container *ngFor="let cart of cartService.cartsArray">
-      <div *ngIf="cart.count" class="card mb-3">
+  <ng-container *ngIf="cartService.totalCopies; else elseBlock">
+    <ng-container *ngFor="let cartItem of cartService.cartItems">
+      <div class="card mb-3">
 
         <div class="card-header">
-          {{cart.plan.tier | edition}}
+          {{cartItem.price.tier | edition}}/{{cartItem.price.cycle | cycle}}
         </div>
 
         <div class="p-3 border-bottom">
-          <span class="text-danger">新增订阅</span> x
-          <input #newSubs style="width: 3em;" type="number" [disabled]="disabled" [value]="cart.newSubs"
-            (change)="setNewSubs(cart.plan, newSubs.value)" />
+          <span class="text-danger">新增订阅</span>
+          <button class="btn btn-light"
+            (click)="incr(cartItem.price)">-</button>
+          <input
+            #newSubs
+            type="number"
+            [disabled]="disabled"
+            [value]="cartItem.newCopies"
+            (change)="setNewSubs(cartItem.price, newSubs.value)" />
+          <button class="btn btn-light"
+            (click)="decr(cartItem.price)">+</button>
         </div>
 
-        <div *ngIf="cart.renewals.size">
+        <div>
           <div class="p-3">
             <span class="text-danger">续订</span> x
-            <span>{{cart.renewals.size}}</span>
+            <span>{{cartItem.countRenewalCopies}}</span>
           </div>
-          <ul *ngIf="cart.renewals.size" class="list-group list-group-flush">
-            <li *ngFor="let lic of cart.renewalLicences" class="list-group-item d-flex justify-content-between">
-              <span>{{lic.expireDate}}</span>
+          <ul
+            class="list-group list-group-flush">
+
+            <li *ngFor="let lic of cartItem.renewalLicences" class="list-group-item d-flex justify-content-between">
+              <span>{{lic.periodEndUtc}}</span>
               <ng-container [ngSwitch]="lic.status">
                 <span *ngSwitchCase="'available'">
                   无使用者
@@ -41,13 +51,14 @@
         </div>
 
         <div class="card-footer text-right">
-          <div>{{cart.plan.price | currency:'CNY':'symbol-narrow'}}/{{cart.plan.cycle | cycle}}/份</div>
+          <div>
+            {{cartItem.productPrice.unitAmount | currency:'CNY':'symbol-narrow'}}/份
+            x {{cartItem.totalCopies}}
+          </div>
 
-          <div class="text-danger">{{cart.unitPrice | currency:'CNY':'symbol-narrow'}} x {{cart.count}} =
-            {{cart.totalAmount}}</div>
-
-          <div class="text-muted" *ngIf="cart.discount.priceOff">
-            享满{{cart.discount.threshold}}份每份减{{cart.discount.priceOff}}元</div>
+          <div class="text-danger">
+            = {{cartItem.totalAmount | currency:'CNY':'symbol-narrow'}}
+          </div>
         </div>
       </div><!-- End card -->
 

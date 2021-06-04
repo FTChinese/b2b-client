@@ -25,8 +25,8 @@ export class RevokeLicenceComponent implements OnInit {
 
   revoke() {
     this.licence.status = 'available';
-    this.licence.lastInvitationId = null;
-    this.licence.lastInviteeEmail = null;
+    this.licence.lastInvitation.id = '';
+    this.licence.lastInvitation.email = '';
     this.licence.assignee = {
       ftcId: null,
       email: null,

@@ -64,8 +64,8 @@ export class InviteComponent implements OnInit {
         console.log(ok);
 
         this.licence.status = 'invited';
-        this.licence.lastInvitationId = invitationID();
-        this.licence.lastInviteeEmail = 'inviated@example.org';
+        this.licence.lastInvitation.id = invitationID();
+        this.licence.lastInvitation.email = 'inviated@example.org';
 
         this.invited.emit(this.licence);
         this.modalService.close();

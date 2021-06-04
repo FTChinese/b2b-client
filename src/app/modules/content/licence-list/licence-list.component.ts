@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { licences } from 'src/app/data/mock';
+import { mockLicences, mockProducts } from 'src/app/data/mock';
 import { CartService } from 'src/app/data/service/cart.service';
 import { Licence } from 'src/app/data/schema/licence';
 import { Product } from 'src/app/data/schema/product';
@@ -12,7 +12,7 @@ import { ModalService } from 'src/app/shared/service/modal.service';
 })
 export class LicenceListComponent implements OnInit {
 
-  readonly licences = licences;
+  readonly licences = mockLicences;
   products: Product[];
   invitedLic: Licence;
   revokingLicInv: Licence;
@@ -22,7 +22,7 @@ export class LicenceListComponent implements OnInit {
     readonly cartService: CartService,
     private modalService: ModalService,
   ) {
-    this.products = this.cartService.getProducts();
+    this.products = mockProducts;
   }
 
   ngOnInit(): void {
@@ -37,8 +37,7 @@ export class LicenceListComponent implements OnInit {
 
   isInRenewList(l: Licence): boolean {
     return this.cartService
-      .getCart(l.plan)
-      .hasRenewal(l);
+      .hasRenwal(l);
   }
 
   showGrantDialog(l: Licence) {

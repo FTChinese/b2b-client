@@ -25,8 +25,8 @@ export class RevokeInvitationComponent implements OnInit {
 
   revoke() {
     this.licence.status = 'available';
-    this.licence.lastInvitationId = null;
-    this.licence.lastInviteeEmail = null;
+    this.licence.lastInvitation.id = '';
+    this.licence.lastInvitation.email = '';
 
     this.reovked.emit(this.licence);
     this.modalService.close();

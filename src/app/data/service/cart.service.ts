@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Product, Plan } from '../schema/product';
-import { products } from '../mock';
-import { Cart, CartItem } from '../schema/cart';
+import { Price } from '../schema/product';
+import { mockProducts } from '../mock';
+import { CartItem } from '../schema/shopping-cart';
 import { Licence } from '../schema/licence';
 import { Tier } from '../schema/enum';
 
@@ -10,75 +10,80 @@ import { Tier } from '../schema/enum';
 })
 export class CartService {
 
-  private carts: Map<Tier, Cart> = new Map();
+  private items: Map<string, CartItem> = new Map();
+  private latestPrices: Map<Tier, Price> = new Map();
 
-  get cartsArray(): Cart[] {
-    return Array.from(this.carts.values());
+  get cartItems(): CartItem[] {
+    return Array.from(this.items.values());
   }
 
   get totalAmount(): number {
-    return Array.from(this.carts.values())
-      .map(cart => cart.totalAmount)
+    return Array.from(this.items.values())
+      .map(item => item.totalAmount)
       .reduce((prev, curr) => prev + curr, 0);
   }
 
-  get totalItems(): number {
-    return Array.from(this.carts.values())
-      .map(cart => cart.count)
+  get totalCopies(): number {
+    return Array.from(this.items.values())
+      .map(item => item.totalCopies)
       .reduce((prev, curr) => prev + curr, 0);
+  }
+
+  newCopiesOf(price: Price): number {
+    return this.items.get(price.id)?.countNewCopies || 0;
   }
 
   constructor() {
-    this.carts.set('standard', new Cart());
-    this.carts.set('premium', new Cart());
+    mockProducts.map(p => p.prices[0])
+      .forEach(price => this.latestPrices.set(price.tier, price));
   }
 
-  getProducts(): Product[] {
+  private ensureItemExists(price: Price) {
+    this.latestPrices.set(price.tier, price);
 
-    products.forEach(product => {
-      this.carts
-        .get(product.plan.tier)
-        .setPlan(product.plan);
-    });
+    if (this.items.has(price.id)) {
+      return;
+    }
 
-    return products;
+    this.items.set(price.id, new CartItem(price));
   }
 
-  addNewSubs(plan: Plan) {
-    this.carts.get(plan.tier)?.addNewSubs();
+  incrNewCopy(price: Price) {
+    this.ensureItemExists(price);
+    this.items.get(price.id)?.incrNewCopy();
   }
 
-  setNewSubs(plan: Plan, copies: number) {
-    this.carts.get(plan.tier)?.setNewSubs(copies);
+  decrNewCopy(price: Price) {
+    this.items.get(price.id)?.decrNewCopy();
+  }
+
+  setNewCopies(price: Price, n: number) {
+    this.ensureItemExists(price);
+    this.items.get(price.id)?.setNewCopies(n);
   }
 
   addRenewal(l: Licence) {
-    this.carts.get(l.plan.tier)?.addRenewal(l);
+    const price = this.latestPrices.get(l.tier);
+    if (price) {
+      this.items.get(price.id).addRenewal(l);
+    }
   }
 
   removeRenwal(l: Licence) {
-    this.carts.get(l.plan.tier)?.removeRenewal(l);
+    const price = this.latestPrices.get(l.tier);
+    if (price) {
+      this.items.get(price.id).deleteRenewal(l);
+    }
+  }
+
+  hasRenwal(l: Licence): boolean {
+    const price = this.latestPrices.get(l.tier);
+    return this.items.get(price.id).hasRenewal(l);
   }
 
   clearCarts() {
-    this.carts.forEach(cart => {
+    this.items.forEach(cart => {
       cart.clear();
     });
-  }
-
-  getCart(plan: Plan): Cart {
-    let c = this.carts.get(plan.tier);
-    if (c) {
-      return c;
-    }
-
-    c = new Cart().setPlan(plan);
-    this.carts.set(plan.tier, c);
-    return c;
-  }
-
-  // Data that will be submitted to backend.
-  json(): CartItem[] {
-    return this.cartsArray.map(cart => cart.json());
   }
 }

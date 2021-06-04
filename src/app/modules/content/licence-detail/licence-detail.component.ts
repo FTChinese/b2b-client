@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { licences } from 'src/app/data/mock';
+import { mockLicences } from 'src/app/data/mock';
 import { Licence } from 'src/app/data/schema/licence';
 
 @Component({
@@ -23,7 +23,7 @@ export class LicenceDetailComponent implements OnInit {
       switchMap(params => {
         const licId = params.get('id');
 
-        const lic = licences.find(l => l.id === licId);
+        const lic = mockLicences.find(l => l.id === licId);
 
         if (lic) {
           return of(lic);
