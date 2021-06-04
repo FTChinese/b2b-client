@@ -9,3 +9,5 @@ export type OrderKind = 'create' | 'renew';
 export type AccountKind = 'ftc' | 'wechat' | 'linked';
 export type LicenceStatus = 'available' | 'invited' | 'granted';
 export type InvitationStatus = 'created' | 'accepted' | 'revoked';
+export type PriceSource = 'ftc' | 'stripe';
+export type OfferKind = 'promotion' | 'retention' | 'win_back';
