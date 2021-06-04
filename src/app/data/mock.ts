@@ -1,4 +1,4 @@
-import { Product, Plan } from './schema/product';
+import { Product, Plan, Price } from './schema/product';
 import { Licence } from './schema/licence';
 import { Invitation } from './schema/invitation';
 import { Staffer } from './schema/assignee';
@@ -50,34 +50,50 @@ export const prmPlan: Plan = {
   ]
 };
 
-export const products: Product[] = [
+export const mockStdPrice: Price = {
+  id: 'plan_ICMPPM0UXcpZ',
+  tier: 'standard',
+  cycle: 'year',
+  active: true,
+  currency: '¥',
+  nickname: null,
+  productId: 'prod_IxN4111S1TIP',
+  source: 'ftc',
+  unitAmount: 298,
+};
+
+export const mockPrmPrice: Price = {
+  id: 'plan_5iIonqaehig4',
+  tier: 'premium',
+  cycle: 'year',
+  active: true,
+  currency: '¥',
+  nickname: null,
+  productId: 'prod_dcHBCHaBTn3w',
+  source: 'ftc',
+  unitAmount: 1998,
+};
+
+export const mockProducts: Product[] = [
   {
     id: 'prod_IxN4111S1TIP',
     tier: 'standard',
     heading: '标准会员',
     smallPrint: null,
-    description: [
-      '专享订阅内容每日仅需0.7元(或按月订阅每日0.9元)',
-      '精选深度分析',
-      '中英双语内容',
-      '金融英语速读训练',
-      '英语原声电台',
-      '无限浏览7日前所有历史文章（近8万篇）'
-    ],
-    plan: stdPlan
+    description: '专享订阅内容每日仅需0.7元(或按月订阅每日0.9元)\n精选深度分析\n中英双语内容\n金融英语速读训练\n英语原声电台\n无限浏览7日前所有历史文章（近8万篇）',
+    prices: [
+      mockStdPrice
+    ]
   },
   {
     id: 'prod_dcHBCHaBTn3w',
     tier: 'premium',
     heading: '高端会员',
     smallPrint: '注：所有活动门票不可折算现金、不能转让、不含差旅与食宿',
-    description: [
-      '专享订阅内容每日仅需5.5元',
-      '享受“标准会员”所有权益',
-      '编辑精选，总编/各版块主编每周五为您推荐本周必读资讯，分享他们的思考与观点',
-      'FT中文网2018年度论坛门票2张，价值3999元/张 （不含差旅与食宿）'
-    ],
-    plan: prmPlan
+    description: '专享订阅内容每日仅需5.5元\n享受“标准会员”所有权益\n编辑精选，总编/各版块主编每周五为您推荐本周必读资讯，分享他们的思考与观点\nFT中文网2018年度论坛门票2张，价值3999元/张 （不含差旅与食宿）',
+    prices: [
+      mockPrmPrice,
+    ]
   }
 ];
 
@@ -86,85 +102,6 @@ const createdUtc = '2020-05-05T17:19:00Z';
 function licenceID(): string {
   return `lic_${randomString()}`;
 }
-
-export const licences: Licence[] = [
-  {
-    id: licenceID(),
-    teamId: '',
-    expireDate: '2021-05-20',
-    trialStart: '2020-05-05',
-    trialEnd: '2020-05-12',
-    status: 'available',
-    createdUtc,
-    updatedUtc: createdUtc,
-    lastInvitationId: null,
-    lastInviteeEmail: null,
-    plan: stdPlan,
-    assignee: {
-      ftcId: null,
-      email: null,
-      userName: null,
-      isVip: false,
-    },
-  },
-  {
-    id: licenceID(),
-    teamId: '',
-    expireDate: '2021-05-20',
-    trialStart: '2020-05-05',
-    trialEnd: '2020-05-12',
-    status: 'invited',
-    createdUtc,
-    updatedUtc: createdUtc,
-    lastInvitationId: invitationID(),
-    lastInviteeEmail: 'testA@example.rog',
-    plan: stdPlan,
-    assignee: {
-      ftcId: null,
-      email: null,
-      userName: null,
-      isVip: false,
-    },
-  },
-  {
-    id: licenceID(),
-    teamId: '',
-    expireDate: '2021-05-20',
-    trialStart: '2020-05-05',
-    trialEnd: '2020-05-12',
-    status: 'granted',
-    createdUtc,
-    updatedUtc: createdUtc,
-    lastInvitationId: invitationID(),
-    lastInviteeEmail: 'testB@example.org',
-    plan: stdPlan,
-    assignee: {
-      ftcId: randomString(),
-      email: 'testB@example.org',
-      userName: 'test user b',
-      isVip: false,
-    },
-  },
-  {
-    id: licenceID(),
-    teamId: '',
-    expireDate: '2021-05-20',
-    trialStart: '2020-05-05',
-    trialEnd: '2020-05-12',
-    status: 'granted',
-    createdUtc,
-    updatedUtc: createdUtc,
-    lastInvitationId: invitationID(),
-    lastInviteeEmail: 'testC@example.org',
-    plan: prmPlan,
-    assignee: {
-      ftcId: randomString(),
-      email: 'testC@example.org',
-      userName: 'test user c',
-      isVip: false,
-    },
-  }
-];
 
 export function invitationID(): string {
   return `inv_${randomString()}`;
@@ -175,6 +112,134 @@ const teamId = `team_${randomString()}`;
 function generateEmail(): string {
   return `${Math.random().toString(36).substring(2, 6)}@example.org`;
 }
+
+export const mockLicences: Licence[] = [
+  {
+    id: licenceID(),
+    teamId: '',
+    tier: 'standard',
+    cycle: 'year',
+    periodStartUtc: '2021-05-20T00:00:00Z',
+    periodEndUtc: '2021-05-20T00:00:00Z',
+    trialStartUtc: '2020-05-05',
+    trialEndUtc: '2020-05-12',
+    status: 'available',
+    createdUtc,
+    updatedUtc: createdUtc,
+    lastInvitation: {
+      id: '',
+      licenceId: '',
+      teamId: '',
+      email: '',
+      description: null,
+      expirationDays: 0,
+      status: null,
+      createdUtc: '',
+      updatedUtc: ''
+    },
+    lastPrice: mockStdPrice,
+    assignee: {
+      ftcId: null,
+      email: null,
+      userName: null,
+      isVip: false,
+    },
+  },
+  {
+    id: licenceID(),
+    teamId: '',
+    tier: 'standard',
+    cycle: 'year',
+    periodStartUtc: '2021-05-20T00:00:00Z',
+    periodEndUtc: '2021-05-20T00:00:00Z',
+    trialStartUtc: '2020-05-05',
+    trialEndUtc: '2020-05-12',
+    status: 'invited',
+    createdUtc,
+    updatedUtc: createdUtc,
+    lastInvitation: {
+      id: invitationID(),
+      licenceId: licenceID(),
+      teamId,
+      email: generateEmail(),
+      description: null,
+      expirationDays: 7,
+      status: 'created',
+      createdUtc,
+      updatedUtc: createdUtc
+    },
+    lastPrice: mockStdPrice,
+    assignee: {
+      ftcId: null,
+      email: null,
+      userName: null,
+      isVip: false,
+    },
+  },
+  {
+    id: licenceID(),
+    teamId: '',
+    tier: 'standard',
+    cycle: 'year',
+    periodStartUtc: '2021-05-20T00:00:00Z',
+    periodEndUtc: '2021-05-20T00:00:00Z',
+    trialStartUtc: '2020-05-05',
+    trialEndUtc: '2020-05-12',
+    status: 'granted',
+    createdUtc,
+    updatedUtc: createdUtc,
+    lastInvitation: {
+      id: invitationID(),
+      licenceId: licenceID(),
+      teamId,
+      email: generateEmail(),
+      description: null,
+      expirationDays: 7,
+      status: 'accepted',
+      createdUtc,
+      updatedUtc: createdUtc
+    },
+    lastPrice: mockStdPrice,
+    assignee: {
+      ftcId: randomString(),
+      email: 'testB@example.org',
+      userName: 'test user b',
+      isVip: false,
+    },
+  },
+  {
+    id: licenceID(),
+    teamId: '',
+    tier: 'premium',
+    cycle: 'year',
+    periodStartUtc: '2021-05-20T00:00:00Z',
+    periodEndUtc: '2021-05-20T00:00:00Z',
+    trialStartUtc: '2020-05-05',
+    trialEndUtc: '2020-05-12',
+    status: 'granted',
+    createdUtc,
+    updatedUtc: createdUtc,
+    lastInvitation: {
+      id: invitationID(),
+      licenceId: licenceID(),
+      teamId,
+      email: generateEmail(),
+      description: null,
+      expirationDays: 7,
+      status: 'accepted',
+      createdUtc,
+      updatedUtc: createdUtc
+    },
+    lastPrice: mockPrmPrice,
+    assignee: {
+      ftcId: randomString(),
+      email: 'testC@example.org',
+      userName: 'test user c',
+      isVip: false,
+    },
+  }
+];
+
 
 export const invitations: Invitation[] = [
   {
@@ -225,13 +290,13 @@ export const checkouts: Checkout[] = [
         plan: stdPlan,
         discount: stdPlan.discounts[0],
         create: 10,
-        renewal: licences.map(l => l.id),
+        renewal: mockLicences.map(l => l.id),
       },
       {
         plan: prmPlan,
         discount: prmPlan.discounts[1],
         create: 5,
-        renewal: licences.map(l => l.id)
+        renewal: mockLicences.map(l => l.id)
       }
     ]
   },
@@ -247,13 +312,13 @@ export const checkouts: Checkout[] = [
         plan: stdPlan,
         discount: stdPlan.discounts[0],
         create: 10,
-        renewal: licences.map(l => l.id),
+        renewal: mockLicences.map(l => l.id),
       },
       {
         plan: prmPlan,
         discount: prmPlan.discounts[1],
         create: 5,
-        renewal: licences.map(l => l.id)
+        renewal: mockLicences.map(l => l.id)
       }
     ]
   }
